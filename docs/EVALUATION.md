@@ -77,7 +77,7 @@ dominated by HTTP/WSL2 overhead and should not be presented as a speedup.
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   evaluate \
   --data sample-data/aguvis-500-minilm.json \
   --labels labels/aguvis-500-intents-v1.json \
@@ -91,7 +91,7 @@ java --add-modules jdk.incubator.vector \
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   inject-failures \
   --input sample-data/aguvis-500-minilm.json \
   --output sample-data/aguvis-500-plus-57-labeled-failures.json \
@@ -103,7 +103,7 @@ java --add-modules jdk.incubator.vector \
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   evaluate-recovery \
   --data sample-data/aguvis-500-plus-57-labeled-failures.json \
   --pairs labels/aguvis-labeled-failure-pairs-57.json \

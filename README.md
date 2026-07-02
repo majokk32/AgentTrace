@@ -45,6 +45,7 @@ MiniLM semantic version. No screenshots are downloaded.
 - `sample-data/`: 500 real trajectories plus controlled failure variants
 - `labels/`: human-reviewed intent labels and failure ground truth
 - `reports/`: committed machine-readable CPU and GPU results
+- `CHANGELOG.md`: release history
 - `docs/EVALUATION.md`: evaluation methodology and limitations
 - `docs/GITHUB_SETUP.md`: GitHub publishing and Windows/WSL2 handoff
 - `models/README.md`: pinned model download and checksum instructions
@@ -98,7 +99,7 @@ image URLs, and stores only normalized trajectory content and image counts.
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   import-aguvis \
   --config mobile.navigation \
   --split train \
@@ -121,7 +122,7 @@ when the model is stored at the documented path:
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   embed \
   --input sample-data/aguvis-500.json \
   --output sample-data/aguvis-500-minilm.json \
@@ -140,7 +141,7 @@ Generate a reproducible dataset/search smoke report:
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   report \
   --data sample-data/aguvis-500-minilm.json \
   --index data/aguvis-500-minilm-report-index \
@@ -154,7 +155,7 @@ java --add-modules jdk.incubator.vector \
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0-SNAPSHOT.jar \
+  -jar target/agenttrace-0.1.0.jar \
   --data sample-data/trajectories.json \
   --index data/lucene-index \
   --port 8080
@@ -221,7 +222,7 @@ Then select cuVS from the Java service or evaluation commands:
 ```powershell
 java --add-modules jdk.incubator.vector `
   --enable-native-access=ALL-UNNAMED `
-  -jar target\agenttrace-0.1.0-SNAPSHOT.jar `
+  -jar target\agenttrace-0.1.0.jar `
   --backend cuvs `
   --cuvs-url http://127.0.0.1:8765 `
   --data sample-data\trajectories.json `

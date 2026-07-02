@@ -66,7 +66,7 @@ Run the labeled evaluation from another PowerShell terminal:
 ```powershell
 java --add-modules jdk.incubator.vector `
   --enable-native-access=ALL-UNNAMED `
-  -jar target\agenttrace-0.1.0-SNAPSHOT.jar `
+  -jar target\agenttrace-0.1.0.jar `
   evaluate `
   --backend cuvs `
   --cuvs-url http://127.0.0.1:8765 `
