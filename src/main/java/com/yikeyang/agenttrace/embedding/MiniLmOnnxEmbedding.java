@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -23,6 +24,17 @@ public final class MiniLmOnnxEmbedding implements TextEmbeddingModel {
     private final OrtSession session;
     private final WordPieceTokenizer tokenizer;
     private final int batchSize;
+    private final String modelName;
+
+    public static Path defaultModelPath() {
+        String architecture =
+                System.getProperty("os.arch", "").toLowerCase(Locale.ROOT);
+        String fileName = architecture.contains("aarch64")
+                || architecture.contains("arm64")
+                ? "model_qint8_arm64.onnx"
+                : "model_quint8_avx2.onnx";
+        return Path.of("models", "all-MiniLM-L6-v2", fileName);
+    }
 
     public MiniLmOnnxEmbedding(
             Path modelPath,
@@ -42,6 +54,8 @@ public final class MiniLmOnnxEmbedding implements TextEmbeddingModel {
         this.environment = OrtEnvironment.getEnvironment();
         this.tokenizer = new WordPieceTokenizer(vocabularyPath, maxLength);
         this.batchSize = batchSize;
+        this.modelName = "sentence-transformers/all-MiniLM-L6-v2/"
+                + modelPath.getFileName();
         try (OrtSession.SessionOptions options = new OrtSession.SessionOptions()) {
             options.setOptimizationLevel(
                     OrtSession.SessionOptions.OptLevel.ALL_OPT);
@@ -54,7 +68,7 @@ public final class MiniLmOnnxEmbedding implements TextEmbeddingModel {
 
     @Override
     public String name() {
-        return "sentence-transformers/all-MiniLM-L6-v2-qint8-arm64";
+        return modelName;
     }
 
     @Override

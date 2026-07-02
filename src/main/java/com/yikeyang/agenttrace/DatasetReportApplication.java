@@ -7,7 +7,9 @@ import com.yikeyang.agenttrace.model.DuplicateGroup;
 import com.yikeyang.agenttrace.model.SearchRequest;
 import com.yikeyang.agenttrace.model.SearchResult;
 import com.yikeyang.agenttrace.model.Trajectory;
-import com.yikeyang.agenttrace.search.LuceneTrajectorySearchBackend;
+import com.yikeyang.agenttrace.search.CuvsTrajectorySearchBackend;
+import com.yikeyang.agenttrace.search.SearchBackendFactory;
+import com.yikeyang.agenttrace.search.TrajectorySearchBackend;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
@@ -31,6 +33,9 @@ public final class DatasetReportApplication {
                 "output", "reports/aguvis-500-report.json"));
         float threshold = Float.parseFloat(options.getOrDefault("threshold", "0.92"));
         int candidateK = Integer.parseInt(options.getOrDefault("candidate-k", "10"));
+        String backendName = options.getOrDefault("backend", "lucene");
+        String cuvsUrl = options.getOrDefault(
+                "cuvs-url", CuvsTrajectorySearchBackend.DEFAULT_URL);
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<Trajectory> trajectories =
@@ -40,19 +45,21 @@ public final class DatasetReportApplication {
         List<DuplicateGroup> duplicateGroups;
         long buildMillis;
         long dedupMillis;
+        String backend;
         Trajectory example = trajectories.getFirst();
         List<SearchResult> exampleResults;
-        try (LuceneTrajectorySearchBackend backend =
-                     new LuceneTrajectorySearchBackend(indexPath)) {
-            backend.rebuild(trajectories);
+        try (TrajectorySearchBackend searchBackend = SearchBackendFactory.create(
+                backendName, indexPath, cuvsUrl, objectMapper)) {
+            searchBackend.rebuild(trajectories);
             buildMillis = elapsedMillis(buildStart);
+            backend = searchBackend.stats().backend();
 
             long dedupStart = System.nanoTime();
-            duplicateGroups =
-                    backend.findDuplicateGroups(trajectories, threshold, candidateK);
+            duplicateGroups = searchBackend.findDuplicateGroups(
+                    trajectories, threshold, candidateK);
             dedupMillis = elapsedMillis(dedupStart);
 
-            exampleResults = backend.search(new SearchRequest(
+            exampleResults = searchBackend.search(new SearchRequest(
                             example.embedding(),
                             Math.min(6, trajectories.size()),
                             example.platform(),
@@ -83,10 +90,14 @@ public final class DatasetReportApplication {
 
         DatasetReport report = new DatasetReport(
                 Instant.now().toString(),
+                System.getProperty("java.version"),
+                System.getProperty("os.name"),
+                System.getProperty("os.arch"),
                 dataPath.toString(),
                 trajectories.size(),
                 example.embedding().length,
                 embeddingModel,
+                backend,
                 imageReferences,
                 countBy(trajectories, "app"),
                 countBy(trajectories, "source"),
@@ -137,7 +148,7 @@ public final class DatasetReportApplication {
 
     private static String inferEmbeddingModel(int dimension) {
         if (dimension == MiniLmOnnxEmbedding.DIMENSION) {
-            return "sentence-transformers/all-MiniLM-L6-v2-qint8-arm64";
+            return "sentence-transformers/all-MiniLM-L6-v2";
         }
         return "AgentTrace feature-hashing baseline";
     }
@@ -145,7 +156,7 @@ public final class DatasetReportApplication {
     private static String inferLimitation(int dimension) {
         if (dimension == MiniLmOnnxEmbedding.DIMENSION) {
             return "Text/action-only semantic baseline: screenshot pixels are not embedded, "
-                    + "and retrieval quality has not yet been measured against a labeled set.";
+                    + "and quality is measured on a small human-reviewed label set.";
         }
         return "Feature hashing is a lightweight pipeline baseline, "
                 + "not a semantic ML embedding.";
@@ -166,10 +177,14 @@ public final class DatasetReportApplication {
 
     private record DatasetReport(
             String generatedAt,
+            String javaVersion,
+            String operatingSystem,
+            String architecture,
             String dataPath,
             int trajectoryCount,
             int embeddingDimension,
             String embeddingModel,
+            String backend,
             long imageReferences,
             Map<String, Integer> appCounts,
             Map<String, Integer> sourceCounts,

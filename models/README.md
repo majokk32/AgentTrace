@@ -35,8 +35,24 @@ File sizes are approximately 23 MB and 232 KB.
 
 ## Windows x64
 
-The same pinned model repository provides
-`onnx/model_quint8_avx2.onnx` for x64 CPUs. Use that file through the same
-`--model` CLI option. ONNX Runtime's CUDA package can later be added separately;
-the current semantic baseline deliberately uses CPU inference so vector-search
-backend measurements remain isolated.
+Download the AVX2 model from the same pinned revision:
+
+```powershell
+curl.exe -L --fail `
+  "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/dfa9feb5cece5be2cc8fc23a3cf1f32473a9d56f/onnx/model_quint8_avx2.onnx?download=true" `
+  -o models/all-MiniLM-L6-v2/model_quint8_avx2.onnx
+curl.exe -L --fail `
+  "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/dfa9feb5cece5be2cc8fc23a3cf1f32473a9d56f/vocab.txt?download=true" `
+  -o models/all-MiniLM-L6-v2/vocab.txt
+```
+
+Verify:
+
+```text
+b941bf19f1f1283680f449fa6a7336bb5600bdcd5f84d10ddc5cd72218a0fd21  model_quint8_avx2.onnx
+07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3  vocab.txt
+```
+
+AgentTrace selects this file by default on x64. ONNX Runtime's CUDA package can
+later be added separately; the current semantic baseline deliberately uses CPU
+inference so vector-search backend measurements remain isolated.

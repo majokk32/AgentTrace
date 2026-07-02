@@ -1,6 +1,6 @@
-# CPU evaluation before cuVS
+# Embedding and backend evaluation
 
-This stage answers two questions before adding a GPU backend:
+The labeled evaluation answers two product questions:
 
 1. Does a real semantic embedding improve retrieval over feature hashing?
 2. Can an incomplete failed trajectory retrieve a comparable successful trace?
@@ -55,6 +55,23 @@ ranking:
 These 57 controlled failures verify the end-to-end retrieval workflow. They do
 not replace naturally collected failures and should not be presented as such.
 
+## Lucene and cuVS parity
+
+The exact cuVS brute-force backend uses the same 500 MiniLM vectors and labels.
+Its ranking metrics match Lucene:
+
+| Metric | Lucene HNSW | cuVS exact |
+|---|---:|---:|
+| Recall@5 | 0.608 | 0.608 |
+| Precision@5 | 0.779 | 0.779 |
+| HitRate@5 | 1.000 | 1.000 |
+| MRR | 0.965 | 0.965 |
+| Duplicate groups at 0.92 | 6 | 6 |
+
+The cuVS recovery results also match the Lucene values above. The current GPU
+transport sends one localhost request per query, so the 500-vector latency is
+dominated by HTTP/WSL2 overhead and should not be presented as a speedup.
+
 ## Reproduce
 
 ```bash
@@ -80,7 +97,6 @@ java --add-modules jdk.incubator.vector \
   --output sample-data/aguvis-500-plus-57-labeled-failures.json \
   --pairs labels/aguvis-labeled-failure-pairs-57.json \
   --labels labels/aguvis-500-intents-v1.json \
-  --model models/all-MiniLM-L6-v2/model_qint8_arm64.onnx \
   --vocab models/all-MiniLM-L6-v2/vocab.txt
 ```
 
@@ -94,4 +110,12 @@ java --add-modules jdk.incubator.vector \
   --index data/recovery-eval-index \
   --k 5 \
   --output reports/recovery-evaluation.json
+```
+
+With the worker from `docs/GPU_MIGRATION.md` running, add these options to
+either evaluation command:
+
+```text
+--backend cuvs
+--cuvs-url http://127.0.0.1:8765
 ```

@@ -50,6 +50,8 @@ class RecoveryEvaluationApplicationTest {
         });
 
         JsonNode result = mapper.readTree(report.toFile());
+        assertEquals(System.getProperty("os.name"),
+                result.path("operatingSystem").asText());
         assertEquals(1.0, result.path("parentRecallAt1").asDouble());
         assertEquals(1.0, result.path("parentExcludedIntentHitRateAtK").asDouble());
         assertEquals(1.0, result.path("parentExcludedIntentMeanReciprocalRank").asDouble());

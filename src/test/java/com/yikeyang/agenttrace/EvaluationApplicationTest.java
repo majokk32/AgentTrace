@@ -51,6 +51,8 @@ class EvaluationApplicationTest {
         });
 
         JsonNode result = mapper.readTree(report.toFile());
+        assertEquals(System.getProperty("os.name"),
+                result.path("operatingSystem").asText());
         assertEquals(1.0, result.path("retrieval").path("hitRateAtK").asDouble());
         assertEquals(1.0, result.path("retrieval")
                 .path("meanReciprocalRank").asDouble());

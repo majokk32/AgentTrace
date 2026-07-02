@@ -8,7 +8,9 @@ import com.yikeyang.agenttrace.io.TrajectoryFileLoader;
 import com.yikeyang.agenttrace.model.SearchRequest;
 import com.yikeyang.agenttrace.model.SearchResult;
 import com.yikeyang.agenttrace.model.Trajectory;
-import com.yikeyang.agenttrace.search.LuceneTrajectorySearchBackend;
+import com.yikeyang.agenttrace.search.CuvsTrajectorySearchBackend;
+import com.yikeyang.agenttrace.search.SearchBackendFactory;
+import com.yikeyang.agenttrace.search.TrajectorySearchBackend;
 import com.yikeyang.agenttrace.search.VectorMath;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,6 +42,9 @@ public final class EvaluationApplication {
         int k = Integer.parseInt(options.getOrDefault("k", "5"));
         float duplicateThreshold = Float.parseFloat(
                 options.getOrDefault("duplicate-threshold", "0.92"));
+        String backendName = options.getOrDefault("backend", "lucene");
+        String cuvsUrl = options.getOrDefault(
+                "cuvs-url", CuvsTrajectorySearchBackend.DEFAULT_URL);
         if (k < 1 || k > 100) {
             throw new IllegalArgumentException("k must be between 1 and 100");
         }
@@ -59,23 +64,30 @@ public final class EvaluationApplication {
         long buildStarted = System.nanoTime();
         RetrievalMetrics retrievalMetrics;
         long indexBuildMillis;
-        try (LuceneTrajectorySearchBackend backend =
-                     new LuceneTrajectorySearchBackend(indexPath)) {
-            backend.rebuild(trajectories);
+        String backend;
+        try (TrajectorySearchBackend searchBackend = SearchBackendFactory.create(
+                backendName, indexPath, cuvsUrl, objectMapper)) {
+            searchBackend.rebuild(trajectories);
             indexBuildMillis = elapsedMillis(buildStarted);
-            retrievalMetrics = evaluateRetrieval(backend, labels, byId, k);
+            backend = searchBackend.stats().backend();
+            retrievalMetrics = evaluateRetrieval(
+                    searchBackend, labels, byId, k);
         }
         DedupMetrics dedupMetrics =
                 evaluateDeduplication(labels, byId, duplicateThreshold);
 
         EvaluationReport report = new EvaluationReport(
                 Instant.now().toString(),
+                System.getProperty("java.version"),
+                System.getProperty("os.name"),
+                System.getProperty("os.arch"),
                 dataPath.toString(),
                 labelsPath.toString(),
                 labels.name(),
                 labels.version(),
                 labels.annotationPolicy(),
                 embeddingModel,
+                backend,
                 trajectories.size(),
                 trajectories.getFirst().embedding().length,
                 indexBuildMillis,
@@ -101,7 +113,7 @@ public final class EvaluationApplication {
     }
 
     private static RetrievalMetrics evaluateRetrieval(
-            LuceneTrajectorySearchBackend backend,
+            TrajectorySearchBackend backend,
             EvaluationLabels labels,
             Map<String, Trajectory> byId,
             int k) throws Exception {
@@ -443,12 +455,16 @@ public final class EvaluationApplication {
 
     private record EvaluationReport(
             String generatedAt,
+            String javaVersion,
+            String operatingSystem,
+            String architecture,
             String dataPath,
             String labelsPath,
             String labelSet,
             String labelVersion,
             String annotationPolicy,
             String embeddingModel,
+            String backend,
             int trajectoryCount,
             int embeddingDimension,
             long indexBuildMillis,

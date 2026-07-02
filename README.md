@@ -1,7 +1,7 @@
 # AgentTrace
 
-AgentTrace is a Java/Lucene system for searching, inspecting, and deduplicating
-GUI-agent training trajectories.
+AgentTrace is a Java system for searching, inspecting, and deduplicating
+GUI-agent training trajectories with Lucene CPU and NVIDIA cuVS GPU backends.
 
 ## Motivation
 
@@ -13,14 +13,16 @@ agent dataset. As the collection grows, data engineers need to answer:
 - Which records are near-duplicates and overrepresented?
 - Can we filter similar trajectories by platform and outcome?
 
-AgentTrace turns each trajectory into an embedding, indexes it with Lucene
-HNSW, and exposes search and deduplication operations through a small HTTP API.
-The GPU is an optional scale-up backend, not the reason the product exists.
+AgentTrace turns each trajectory into an embedding, indexes it with a selectable
+search backend, and exposes search and deduplication operations through a small
+HTTP API. The GPU is an optional scale-up backend, not the reason the product
+exists.
 
 ## Current MVP
 
 - Java 21
 - Apache Lucene HNSW vector index
+- Exact NVIDIA cuVS cosine search through a localhost WSL2 worker
 - Local MiniLM semantic embeddings through Java ONNX Runtime
 - BERT-compatible WordPiece tokenization implemented in Java
 - Human-reviewed retrieval and deduplication evaluation
@@ -30,7 +32,7 @@ The GPU is an optional scale-up backend, not the reason the product exists.
 - Near-duplicate grouping with exact cosine verification
 - JSON HTTP API using Java virtual threads
 - Unit tests and a tiny synthetic fixture
-- Backend interface ready for a future NVIDIA cuVS implementation
+- Runtime-selectable `lucene` and `cuvs` backends
 
 The repository includes two versions of the same 500 public mobile-navigation
 trajectories: a dependency-free feature-hashing baseline and a 384-dimensional
@@ -39,9 +41,10 @@ MiniLM semantic version. No screenshots are downloaded.
 ## Repository contents
 
 - `src/`: Java implementation and tests
+- `gpu/`: pinned WSL2/cuVS setup, launcher, and worker
 - `sample-data/`: 500 real trajectories plus controlled failure variants
 - `labels/`: human-reviewed intent labels and failure ground truth
-- `reports/`: committed machine-readable CPU results
+- `reports/`: committed machine-readable CPU and GPU results
 - `docs/EVALUATION.md`: evaluation methodology and limitations
 - `docs/GITHUB_SETUP.md`: GitHub publishing and Windows/WSL2 handoff
 - `models/README.md`: pinned model download and checksum instructions
@@ -57,12 +60,15 @@ trajectory JSON
                          |
                          v
             TrajectorySearchBackend
-                         |
-                         v
-               Lucene HNSW index
-                  /            \
-                 v              v
-          similarity search   dedup groups
+                 /                 \
+                v                   v
+       Lucene HNSW index     cuVS client (Java)
+                                     |
+                                     v
+                         WSL2 cuVS GPU worker
+                 \                 /
+                  v               v
+             similarity search + dedup groups
                          |
                          v
                     HTTP API
@@ -108,7 +114,9 @@ semantic ML embedding.
 ## Generate semantic embeddings locally
 
 Download the pinned model and vocabulary described in
-[`models/README.md`](models/README.md), then run:
+[`models/README.md`](models/README.md). The CLI selects the ARM64 model on
+ARM64 systems and the AVX2 model on x64 systems, so `--model` can be omitted
+when the model is stored at the documented path:
 
 ```bash
 java --add-modules jdk.incubator.vector \
@@ -117,11 +125,10 @@ java --add-modules jdk.incubator.vector \
   embed \
   --input sample-data/aguvis-500.json \
   --output sample-data/aguvis-500-minilm.json \
-  --model models/all-MiniLM-L6-v2/model_qint8_arm64.onnx \
   --vocab models/all-MiniLM-L6-v2/vocab.txt \
   --max-length 256 \
   --batch-size 16 \
-  --report reports/aguvis-500-minilm-embedding.json
+  --report work/local-minilm-embedding-run.json
 ```
 
 The embedding text combines the task instruction, app, and action sequence.
@@ -139,7 +146,7 @@ java --add-modules jdk.incubator.vector \
   --index data/aguvis-500-minilm-report-index \
   --threshold 0.92 \
   --candidate-k 10 \
-  --output reports/aguvis-500-minilm-report.json
+  --output reports/minilm-dataset-report.json
 ```
 
 ## Run
@@ -194,6 +201,37 @@ curl -X POST http://localhost:8080/api/deduplicate \
   -d '{"threshold": 0.985, "candidateK": 5}'
 ```
 
+## Run with NVIDIA cuVS
+
+The GPU backend uses pinned cuVS 26.06 packages inside Ubuntu/WSL2. From
+PowerShell, install the isolated environment once:
+
+```powershell
+wsl.exe -d Ubuntu-24.04 -u root -- bash gpu/setup-wsl.sh
+```
+
+Start the localhost worker in one terminal:
+
+```powershell
+wsl.exe -d Ubuntu-24.04 -u root -- bash gpu/run-worker-wsl.sh
+```
+
+Then select cuVS from the Java service or evaluation commands:
+
+```powershell
+java --add-modules jdk.incubator.vector `
+  --enable-native-access=ALL-UNNAMED `
+  -jar target\agenttrace-0.1.0-SNAPSHOT.jar `
+  --backend cuvs `
+  --cuvs-url http://127.0.0.1:8765 `
+  --data sample-data\trajectories.json `
+  --port 8080
+```
+
+The worker binds to `127.0.0.1` by default. See
+[`docs/GPU_MIGRATION.md`](docs/GPU_MIGRATION.md) for setup, evaluation, and
+current limitations.
+
 ## What makes this a real project
 
 The output is not merely a CPU/GPU benchmark. A data engineer can use the
@@ -207,12 +245,29 @@ failed-trajectory test that excludes each exact parent, all 57 queries retrieve
 another same-intent successful trajectory in the Top 5. See
 [`docs/EVALUATION.md`](docs/EVALUATION.md) for methodology and limitations.
 
+The native Windows verification is also complete. On the development Windows
+11 x64 host, the pinned AVX2 MiniLM model embedded all 500 trajectories in 9.7
+seconds, the full Maven build passed, and the HTTP API smoke test passed. The
+machine-readable results are in `reports/windows-minilm-embedding-run.json`,
+`reports/windows-minilm-evaluation.json`, and
+`reports/minilm-dataset-report.json`.
+
+The cuVS backend reproduces the Lucene Recall@5, MRR, recovery metrics, and all
+six duplicate groups on the same committed vectors. At 500 vectors, per-request
+localhost/WSL2 overhead makes the GPU path slower; these results establish
+correctness, not a GPU speedup claim.
+
 ## Next milestones
 
-1. Transfer the project to the RTX 4070 Super Windows/WSL2 host.
-2. Add a cuVS backend behind `TrajectorySearchBackend`.
-3. Benchmark Lucene CPU versus cuVS GPU at 10K, 100K, and 1M vectors.
-4. Add screenshot embeddings and multimodal fusion after backend isolation.
+1. Add batched query transport and a cuVS CAGRA approximate-search option.
+2. Benchmark Lucene CPU versus cuVS GPU at 10K, 100K, and 1M real vectors.
+3. Add screenshot embeddings and multimodal fusion.
 
 See [GPU migration](docs/GPU_MIGRATION.md) and
 [dataset plan](docs/DATASET_PLAN.md).
+
+## License
+
+AgentTrace source code is licensed under the
+[Apache License 2.0](LICENSE). Dataset, model, and dependency terms remain
+separate as described in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

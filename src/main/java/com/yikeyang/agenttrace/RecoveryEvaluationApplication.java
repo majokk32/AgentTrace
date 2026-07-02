@@ -7,7 +7,9 @@ import com.yikeyang.agenttrace.io.TrajectoryFileLoader;
 import com.yikeyang.agenttrace.model.SearchRequest;
 import com.yikeyang.agenttrace.model.SearchResult;
 import com.yikeyang.agenttrace.model.Trajectory;
-import com.yikeyang.agenttrace.search.LuceneTrajectorySearchBackend;
+import com.yikeyang.agenttrace.search.CuvsTrajectorySearchBackend;
+import com.yikeyang.agenttrace.search.SearchBackendFactory;
+import com.yikeyang.agenttrace.search.TrajectorySearchBackend;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
@@ -36,6 +38,9 @@ public final class RecoveryEvaluationApplication {
         Path outputPath = Path.of(options.getOrDefault(
                 "output", "reports/recovery-evaluation.json"));
         int k = Integer.parseInt(options.getOrDefault("k", "5"));
+        String backendName = options.getOrDefault("backend", "lucene");
+        String cuvsUrl = options.getOrDefault(
+                "cuvs-url", CuvsTrajectorySearchBackend.DEFAULT_URL);
         if (k < 1 || k > 100) {
             throw new IllegalArgumentException("k must be between 1 and 100");
         }
@@ -52,14 +57,16 @@ public final class RecoveryEvaluationApplication {
         List<Long> latenciesMicros = new ArrayList<>();
         long buildStarted = System.nanoTime();
         long indexBuildMillis;
-        try (LuceneTrajectorySearchBackend backend =
-                     new LuceneTrajectorySearchBackend(indexPath)) {
-            backend.rebuild(trajectories);
+        String backend;
+        try (TrajectorySearchBackend searchBackend = SearchBackendFactory.create(
+                backendName, indexPath, cuvsUrl, objectMapper)) {
+            searchBackend.rebuild(trajectories);
             indexBuildMillis = elapsedMillis(buildStarted);
+            backend = searchBackend.stats().backend();
             for (FailurePair pair : pairSet.pairs()) {
                 Trajectory failure = byId.get(pair.failureId());
                 long searchStarted = System.nanoTime();
-                List<SearchResult> rawResults = backend.search(new SearchRequest(
+                List<SearchResult> rawResults = searchBackend.search(new SearchRequest(
                         failure.embedding(),
                         Math.min(100, k + 1),
                         failure.platform(),
@@ -139,11 +146,15 @@ public final class RecoveryEvaluationApplication {
                 .orElse(0.0);
         RecoveryReport report = new RecoveryReport(
                 Instant.now().toString(),
+                System.getProperty("java.version"),
+                System.getProperty("os.name"),
+                System.getProperty("os.arch"),
                 dataPath.toString(),
                 pairsPath.toString(),
                 pairSet.name(),
                 pairSet.version(),
                 pairSet.generationPolicy(),
+                backend,
                 trajectories.size(),
                 pairSet.pairs().size(),
                 k,
@@ -248,11 +259,15 @@ public final class RecoveryEvaluationApplication {
 
     private record RecoveryReport(
             String generatedAt,
+            String javaVersion,
+            String operatingSystem,
+            String architecture,
             String dataPath,
             String pairsPath,
             String pairSet,
             String pairVersion,
             String generationPolicy,
+            String backend,
             int trajectoryCount,
             int failureQueryCount,
             int k,

@@ -25,21 +25,22 @@ Next target: 1,000 to 10,000 mobile navigation rows:
 - Use a content hash so repeated screenshots are embedded once.
 - Keep a manifest containing source, license, split, and record ID.
 
-## Phase 3: evaluation set
+## Phase 3: evaluation set (completed)
 
-Create a small human-reviewed file with:
+The checked-in human-reviewed evaluation set contains:
 
-- Query trajectory ID
-- Relevant trajectory IDs
-- Duplicate / not-duplicate labels
-- Failure category
+- 57 labeled AGUVIS trajectories in 10 retrieval-intent groups
+- 44 duplicate-positive pairs and 197 negative or hard-negative pairs
+- 57 controlled failure variants with exact-parent and alternative-success labels
 
-This enables precision@k, recall@k, and duplicate-pair F1. Those metrics are
-more meaningful than reporting latency alone.
+It supports precision@k, recall@k, MRR, duplicate-pair F1, and parent-excluded
+failure-recovery metrics. See `docs/EVALUATION.md` for the annotation policy,
+results, and limitations.
 
 ## Phase 4: large-scale run
 
-Move images and GPU indexing to the NVIDIA machine. The Mac retains:
+Run images and GPU indexing on the NVIDIA Windows/WSL2 machine. The portable
+repository retains:
 
 - Source code
 - A small development sample

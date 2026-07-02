@@ -1,0 +1,114 @@
+{
+  "generatedAt" : "2026-07-02T16:35:40.141102600Z",
+  "javaVersion" : "21.0.5",
+  "operatingSystem" : "Windows 11",
+  "architecture" : "amd64",
+  "dataPath" : "sample-data\\aguvis-500-minilm.json",
+  "trajectoryCount" : 500,
+  "embeddingDimension" : 384,
+  "embeddingModel" : "sentence-transformers/all-MiniLM-L6-v2",
+  "backend" : "lucene-hnsw",
+  "imageReferences" : 3557,
+  "appCounts" : {
+    "aitw" : 500
+  },
+  "sourceCounts" : {
+    "xlangai/aguvis-stage2" : 500
+  },
+  "successCounts" : {
+    "true" : 500
+  },
+  "indexBuildMillis" : 545,
+  "deduplicationMillis" : 543,
+  "duplicateThreshold" : 0.92,
+  "duplicateCandidateK" : 10,
+  "duplicateGroupCount" : 6,
+  "groupedTrajectoryCount" : 16,
+  "largestDuplicateGroup" : 5,
+  "exampleQuery" : {
+    "id" : "aguvis_aitw_general_10039701842972332757",
+    "instruction" : "Set an alarmfor 5pm"
+  },
+  "exampleResults" : [ {
+    "id" : "aguvis_aitw_general_18104307305906496809",
+    "instruction" : "Set an alarm for 11am",
+    "platform" : "mobile",
+    "app" : "aitw",
+    "success" : true,
+    "actions" : [ "system_button: Press the home button to return to the home screen.", "swipe: Swipe up to access the app drawer and search for the clock or alarm app.", "swipe: Swipe up to access the app drawer and find the clock or alarm app.", "tap: Access the app drawer by swiping up from the bottom of the screen to find the clock or alarm app.", "swipe: Swipe up to open the app drawer and scroll down to find the clock or alarm app.", "tap: Click on the Clock app icon to open the app and set the alarm.", "tap: Click on the Alarm tab at the top left to switch to the alarm settings.", "tap: Click the '+' button at the bottom to add a new alarm for 11 AM.", "tap: Click the '+' button to add a new alarm.", "tap: Click on the number 11 on the clock interface to set the hour to 11.", "tap: Click on the area where 00 is located to set the minutes to 00.", "tap: Click 'OK' to confirm and save the alarm set for 11:00 AM.", "tap: Click on 'PM' to switch it to 'AM' for the 11:00 AM alarm.", "tap: Click on the 'PM' button to switch it to 'AM'.", "tap: Click on the 'OK' button to confirm the alarm set for 11:00 AM." ],
+    "source" : "xlangai/aguvis-stage2",
+    "sourceId" : "general_18104307305906496809",
+    "imageCount" : 15,
+    "score" : 0.9467182
+  }, {
+    "id" : "aguvis_aitw_general_2824133379378729701",
+    "instruction" : "Set an alarm for 1pm",
+    "platform" : "mobile",
+    "app" : "aitw",
+    "success" : true,
+    "actions" : [ "system_button: Press the home button to navigate to the home screen.", "swipe: Swipe up or down to navigate and search for the Clock app on the screen.", "swipe: Swipe up or down on the screen to reveal more apps and look for the Clock app.", "tap: Tap on the Clock app to open it.", "tap: Click on the 'Alarm' tab to switch views and prepare to set an alarm for 1 PM.", "tap: Click on the blue plus button at the bottom to create a new alarm.", "tap: Click on the '1' to change the hour to 1 PM.", "tap: Tap on the '00' to select it for setting the alarm to 1:00 PM.", "tap: Tap 'OK' to confirm the alarm set for 1:00 PM." ],
+    "source" : "xlangai/aguvis-stage2",
+    "sourceId" : "general_2824133379378729701",
+    "imageCount" : 9,
+    "score" : 0.9454265
+  }, {
+    "id" : "aguvis_aitw_general_9410141523664212867",
+    "instruction" : "Set an alarm for 2pm",
+    "platform" : "mobile",
+    "app" : "aitw",
+    "success" : true,
+    "actions" : [ "tap: Tap the clock app icon to open it.", "tap: Tap on the 4:00 PM alarm to open its settings for modification.", "tap: Tap on the 2 on the clock face to set the hour to 2 PM.", "tap: Tap the OK button to confirm setting the alarm for 2:00 PM.", "tap: Click on the Save or Confirm button to finalize the alarm settings." ],
+    "source" : "xlangai/aguvis-stage2",
+    "sourceId" : "general_9410141523664212867",
+    "imageCount" : 5,
+    "score" : 0.9295237
+  }, {
+    "id" : "aguvis_aitw_general_3927173729863126289",
+    "instruction" : "Set an alarm for 7pm",
+    "platform" : "mobile",
+    "app" : "aitw",
+    "success" : true,
+    "actions" : [ "swipe: Swipe up to access the app drawer and look for the clock app.", "tap: Tap on the Clock app to open it.", "tap: Tap on the \"Alarm\" tab at the top left to switch to it.", "tap: Tap on the 'Alarm' tab to switch to it.", "tap: Click on the 'Mon, Tue, Wed, Thu, Fri' label to proceed with setting a weekday alarm.", "tap: Click on the '+' button at the bottom to create a new alarm for 7:00 PM.", "tap: Click on the number 7 on the clock face to set the hour to 7.", "tap: Click on the '00' on the clock face to set the minutes to 00.", "tap: Click the 'OK' button to set the alarm for 7:00 PM.", "tap: Click the 'OK' button to confirm setting the alarm for 7:00 PM." ],
+    "source" : "xlangai/aguvis-stage2",
+    "sourceId" : "general_3927173729863126289",
+    "imageCount" : 10,
+    "score" : 0.9253857
+  }, {
+    "id" : "aguvis_aitw_general_13725475726512988244",
+    "instruction" : "Set an alarm for 10am",
+    "platform" : "mobile",
+    "app" : "aitw",
+    "success" : true,
+    "actions" : [ "swipe: Swipe up or down to open the app drawer and search for the Clock app.", "tap: Tap the Clock app to open it.", "tap: Tap the downward arrow next to the 9:00 AM alarm to view more options or settings." ],
+    "source" : "xlangai/aguvis-stage2",
+    "sourceId" : "general_13725475726512988244",
+    "imageCount" : 3,
+    "score" : 0.92329
+  } ],
+  "duplicateExamples" : [ {
+    "canonicalId" : "aguvis_aitw_general_12067343550265637689",
+    "memberIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "meanCosineSimilarity" : 0.96034914
+  }, {
+    "canonicalId" : "aguvis_aitw_general_12693930241255467158",
+    "memberIds" : [ "aguvis_aitw_general_12693930241255467158", "aguvis_aitw_general_2845494594604571859" ],
+    "meanCosineSimilarity" : 0.94409513
+  }, {
+    "canonicalId" : "aguvis_aitw_general_16429259049941881261",
+    "memberIds" : [ "aguvis_aitw_general_16429259049941881261", "aguvis_aitw_general_3747125767618087904" ],
+    "meanCosineSimilarity" : 0.92614174
+  }, {
+    "canonicalId" : "aguvis_aitw_general_16536092761588121132",
+    "memberIds" : [ "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_4575780911025792730" ],
+    "meanCosineSimilarity" : 0.93654144
+  }, {
+    "canonicalId" : "aguvis_aitw_general_16631420813711325644",
+    "memberIds" : [ "aguvis_aitw_general_16631420813711325644", "aguvis_aitw_general_18107613326578095012" ],
+    "meanCosineSimilarity" : 0.9508955
+  }, {
+    "canonicalId" : "aguvis_aitw_general_17952721151425091944",
+    "memberIds" : [ "aguvis_aitw_general_17952721151425091944", "aguvis_aitw_general_18394662018573618408" ],
+    "meanCosineSimilarity" : 0.9844091
+  } ],
+  "limitation" : "Text/action-only semantic baseline: screenshot pixels are not embedded, and quality is measured on a small human-reviewed label set."
+}

@@ -23,9 +23,8 @@ The repository intentionally excludes:
 - `models/**/*.onnx` model binaries
 - IDE and macOS metadata
 
-Before making the repository public, choose and add a source-code license if
-you want others to have permission to reuse the implementation. Third-party
-data/model terms are documented separately in `THIRD_PARTY_NOTICES.md`.
+AgentTrace source code is licensed under Apache-2.0. Third-party data and model
+terms are documented separately in `THIRD_PARTY_NOTICES.md`.
 
 ## Clone on the RTX 4070 Super computer
 
@@ -54,6 +53,13 @@ java --add-modules jdk.incubator.vector `
   --output reports\windows-minilm-evaluation.json
 ```
 
-For the cuVS stage, use WSL2/Linux with NVIDIA GPU access. First verify that
-`nvidia-smi` works inside WSL2; then pin CUDA/cuVS versions before adding the
-new backend. Do not commit generated indexes or CUDA build output.
+For the cuVS backend, use the pinned WSL2 environment and localhost worker:
+
+```powershell
+wsl.exe -d Ubuntu-24.04 -u root -- bash gpu/setup-wsl.sh
+wsl.exe -d Ubuntu-24.04 -u root -- bash gpu/run-worker-wsl.sh
+```
+
+Then pass `--backend cuvs --cuvs-url http://127.0.0.1:8765` to the server or
+evaluation commands. Do not commit generated environments, indexes, or model
+weights.

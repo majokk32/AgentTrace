@@ -28,7 +28,7 @@ public final class ReembedApplication {
                 "output", "sample-data/aguvis-500-minilm.json"));
         Path modelPath = Path.of(options.getOrDefault(
                 "model",
-                "models/all-MiniLM-L6-v2/model_qint8_arm64.onnx"));
+                MiniLmOnnxEmbedding.defaultModelPath().toString()));
         Path vocabularyPath = Path.of(options.getOrDefault(
                 "vocab", "models/all-MiniLM-L6-v2/vocab.txt"));
         int maxLength = Integer.parseInt(

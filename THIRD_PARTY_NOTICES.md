@@ -35,3 +35,13 @@ pinned revision, and checksums are in `models/README.md`.
 Maven resolves Apache Lucene, Jackson, JUnit, and Microsoft ONNX Runtime. Their
 licenses remain with their respective projects and are not changed by this
 repository.
+
+## NVIDIA cuVS
+
+The optional WSL2 GPU worker installs RAPIDS cuVS and its CUDA runtime
+dependencies from their official Python packages. cuVS is Apache-2.0 licensed:
+
+- https://github.com/rapidsai/cuvs
+
+These packages are installed outside the repository and retain their own
+licenses and notices.

@@ -37,7 +37,7 @@ public final class FailureInjectionApplication {
         Path pairsPath = Path.of(options.getOrDefault(
                 "pairs", "labels/aguvis-failure-pairs-50.json"));
         Path modelPath = Path.of(options.getOrDefault(
-                "model", "models/all-MiniLM-L6-v2/model_qint8_arm64.onnx"));
+                "model", MiniLmOnnxEmbedding.defaultModelPath().toString()));
         Path vocabularyPath = Path.of(options.getOrDefault(
                 "vocab", "models/all-MiniLM-L6-v2/vocab.txt"));
         int count = Integer.parseInt(options.getOrDefault("count", "50"));
