@@ -1,0 +1,75 @@
+[
+  {
+    "id": "wifi-success-001",
+    "instruction": "Turn on Wi-Fi",
+    "platform": "mobile",
+    "app": "android-settings",
+    "success": true,
+    "actions": ["tap:Network & internet", "tap:Internet", "toggle:Wi-Fi:on"],
+    "embedding": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "wifi-success-002",
+    "instruction": "Enable the wireless network",
+    "platform": "mobile",
+    "app": "android-settings",
+    "success": true,
+    "actions": ["tap:Connections", "toggle:Wi-Fi:on"],
+    "embedding": [0.999, 0.012, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "wifi-failed-001",
+    "instruction": "Turn on Wi-Fi",
+    "platform": "mobile",
+    "app": "android-settings",
+    "success": false,
+    "actions": ["tap:Bluetooth", "toggle:Bluetooth:on"],
+    "embedding": [0.982, 0.035, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "notification-success-001",
+    "instruction": "Disable notification previews",
+    "platform": "mobile",
+    "app": "android-settings",
+    "success": true,
+    "actions": ["tap:Notifications", "tap:Lock screen", "select:Do not show notifications"],
+    "embedding": [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "notification-success-002",
+    "instruction": "Hide notifications on the lock screen",
+    "platform": "mobile",
+    "app": "android-settings",
+    "success": true,
+    "actions": ["tap:Notifications", "tap:Notifications on lock screen", "select:Don't show"],
+    "embedding": [0.006, 0.999, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "login-success-001",
+    "instruction": "Sign in to the shopping app",
+    "platform": "mobile",
+    "app": "demo-shop",
+    "success": true,
+    "actions": ["tap:Sign in", "type:email", "type:password", "tap:Continue"],
+    "embedding": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "login-failed-001",
+    "instruction": "Sign in to the shopping app",
+    "platform": "mobile",
+    "app": "demo-shop",
+    "success": false,
+    "actions": ["tap:Create account", "tap:Back"],
+    "embedding": [0.0, 0.0, 0.993, 0.025, 0.0, 0.0, 0.0, 0.0]
+  },
+  {
+    "id": "desktop-download-001",
+    "instruction": "Download the monthly report",
+    "platform": "desktop",
+    "app": "demo-dashboard",
+    "success": true,
+    "actions": ["click:Reports", "click:Monthly", "click:Download"],
+    "embedding": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+  }
+]
+

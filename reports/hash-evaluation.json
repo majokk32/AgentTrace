@@ -1,0 +1,887 @@
+{
+  "generatedAt" : "2026-07-02T02:58:26.107136Z",
+  "dataPath" : "sample-data/aguvis-500.json",
+  "labelsPath" : "labels/aguvis-500-intents-v1.json",
+  "labelSet" : "AGUVIS-500 intent retrieval and deduplication labels",
+  "labelVersion" : "1.0",
+  "annotationPolicy" : "Retrieval groups share a task family even when slot values differ. Duplicate groups require the same requested end state. Negative pairs deliberately differ in a slot value, target, or privacy mode.",
+  "embeddingModel" : "feature-hashing-256",
+  "trajectoryCount" : 500,
+  "embeddingDimension" : 256,
+  "indexBuildMillis" : 228,
+  "retrieval" : {
+    "k" : 5,
+    "queryCount" : 57,
+    "intentGroupCount" : 10,
+    "recallAtK" : 0.45979532163742687,
+    "precisionAtK" : 0.6421052631578947,
+    "hitRateAtK" : 0.9122807017543859,
+    "meanReciprocalRank" : 0.8362573099415205,
+    "p50LatencyMicros" : 607,
+    "p95LatencyMicros" : 9720,
+    "lowestRecallQueries" : [ {
+      "label" : "latest-tech-news",
+      "queryId" : "aguvis_aitw_general_9710163668547095407",
+      "instruction" : "What's the latest tech news?",
+      "relevantCount" : 1,
+      "relevantRetrieved" : 0,
+      "recallAtK" : 0.0,
+      "precisionAtK" : 0.0,
+      "firstRelevantRank" : 0,
+      "reciprocalRank" : 0.0,
+      "latencyMicros" : 1183,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_14730539207397162288",
+        "instruction" : "What's the latest news in astrophysics?",
+        "score" : 0.93046045
+      }, {
+        "id" : "aguvis_aitw_general_16631420813711325644",
+        "instruction" : "What's the latest news in tech?",
+        "score" : 0.9276118
+      }, {
+        "id" : "aguvis_aitw_general_16886309439946059005",
+        "instruction" : "What's the news in the Bahamas?",
+        "score" : 0.92642266
+      }, {
+        "id" : "aguvis_aitw_general_1507840723125446514",
+        "instruction" : "What's the news in Venezuela?",
+        "score" : 0.9242277
+      }, {
+        "id" : "aguvis_aitw_googleapps_14501989816638382708",
+        "instruction" : "Show me popular videos on Youtube",
+        "score" : 0.9182447
+      } ]
+    }, {
+      "label" : "burger-search-maps",
+      "queryId" : "aguvis_aitw_general_10697484407812183269",
+      "instruction" : "Find a good burger place on Maps",
+      "relevantCount" : 2,
+      "relevantRetrieved" : 0,
+      "recallAtK" : 0.0,
+      "precisionAtK" : 0.0,
+      "firstRelevantRank" : 0,
+      "reciprocalRank" : 0.0,
+      "latencyMicros" : 562,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_6793278074978608674",
+        "instruction" : "Search for a good pizza place on Maps",
+        "score" : 0.8892638
+      }, {
+        "id" : "aguvis_aitw_general_18334824689014299011",
+        "instruction" : "Search for good Italian restaurants on Maps",
+        "score" : 0.8783428
+      }, {
+        "id" : "aguvis_aitw_general_2139470499346320360",
+        "instruction" : "Search for flights from NYC to Buenos aires",
+        "score" : 0.86784637
+      }, {
+        "id" : "aguvis_aitw_googleapps_11939245206930231230",
+        "instruction" : "Search for Italian restaurants on Maps",
+        "score" : 0.8636296
+      }, {
+        "id" : "aguvis_aitw_general_12542843092047567094",
+        "instruction" : "Search for flights from Mexico city to Sydney",
+        "score" : 0.8632747
+      } ]
+    }, {
+      "label" : "burger-search-maps",
+      "queryId" : "aguvis_aitw_general_3747125767618087904",
+      "instruction" : "Search for the best burger restaurants on Maps",
+      "relevantCount" : 2,
+      "relevantRetrieved" : 0,
+      "recallAtK" : 0.0,
+      "precisionAtK" : 0.0,
+      "firstRelevantRank" : 0,
+      "reciprocalRank" : 0.0,
+      "latencyMicros" : 420,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_17285219861897171022",
+        "instruction" : "Search for the best pizza restaurants on Maps",
+        "score" : 0.93526995
+      }, {
+        "id" : "aguvis_aitw_general_15449320860072474554",
+        "instruction" : "Search for vegetarian restaurants on Maps",
+        "score" : 0.9247489
+      }, {
+        "id" : "aguvis_aitw_googleapps_15486942636342250761",
+        "instruction" : "Search for Mexican restaurants on Maps",
+        "score" : 0.9206244
+      }, {
+        "id" : "aguvis_aitw_general_10926722072341013991",
+        "instruction" : "Search for top rated seafood restaurants on Google Maps",
+        "score" : 0.9203265
+      }, {
+        "id" : "aguvis_aitw_googleapps_13294600187192504523",
+        "instruction" : "Search for pizza restaurants on Maps",
+        "score" : 0.9115641
+      } ]
+    }, {
+      "label" : "open-calendar",
+      "queryId" : "aguvis_aitw_general_12954096416707566752",
+      "instruction" : "Open the calendar",
+      "relevantCount" : 1,
+      "relevantRetrieved" : 0,
+      "recallAtK" : 0.0,
+      "precisionAtK" : 0.0,
+      "firstRelevantRank" : 0,
+      "reciprocalRank" : 0.0,
+      "latencyMicros" : 497,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_9733956623439718450",
+        "instruction" : "Install the Calendar app",
+        "score" : 0.9455288
+      }, {
+        "id" : "aguvis_aitw_general_8876975781582457046",
+        "instruction" : "Open the files app",
+        "score" : 0.9403676
+      }, {
+        "id" : "aguvis_aitw_general_9200921213263057143",
+        "instruction" : "Open the clock",
+        "score" : 0.93980384
+      }, {
+        "id" : "aguvis_aitw_general_13849500146321253403",
+        "instruction" : "What's on my calendar for the rest of the week?",
+        "score" : 0.9353181
+      }, {
+        "id" : "aguvis_aitw_general_12934604865186944445",
+        "instruction" : "How do I get to the nearest Sprint Store?",
+        "score" : 0.92911077
+      } ]
+    }, {
+      "label" : "open-calendar",
+      "queryId" : "aguvis_aitw_general_4072036773080449144",
+      "instruction" : "Open the calendar app",
+      "relevantCount" : 1,
+      "relevantRetrieved" : 0,
+      "recallAtK" : 0.0,
+      "precisionAtK" : 0.0,
+      "firstRelevantRank" : 0,
+      "reciprocalRank" : 0.0,
+      "latencyMicros" : 464,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_18394662018573618408",
+        "instruction" : "Open the contacts app",
+        "score" : 0.93822336
+      }, {
+        "id" : "aguvis_aitw_general_7824005441178760090",
+        "instruction" : "Open the camera",
+        "score" : 0.91512656
+      }, {
+        "id" : "aguvis_aitw_googleapps_10278300242839005858",
+        "instruction" : "toggle javascript in the chrome app",
+        "score" : 0.9142418
+      }, {
+        "id" : "aguvis_aitw_general_2697953538967221009",
+        "instruction" : "Check the settings for the Pandora app",
+        "score" : 0.9127471
+      }, {
+        "id" : "aguvis_aitw_general_9170027554742894836",
+        "instruction" : "Open the clock app",
+        "score" : 0.91120565
+      } ]
+    }, {
+      "label" : "city-weather",
+      "queryId" : "aguvis_aitw_general_13190589746115177329",
+      "instruction" : "What's the weather like in Delhi?",
+      "relevantCount" : 14,
+      "relevantRetrieved" : 1,
+      "recallAtK" : 0.07142857142857142,
+      "precisionAtK" : 0.2,
+      "firstRelevantRank" : 4,
+      "reciprocalRank" : 0.25,
+      "latencyMicros" : 4123,
+      "results" : [ {
+        "id" : "aguvis_aitw_googleapps_10561990975151718943",
+        "instruction" : "Is it going to rain tomorrow?",
+        "score" : 0.8389176
+      }, {
+        "id" : "aguvis_aitw_googleapps_14422128834473982231",
+        "instruction" : "Is it going to rain this weekend?",
+        "score" : 0.8309284
+      }, {
+        "id" : "aguvis_aitw_general_17746725609558395816",
+        "instruction" : "Search for hotels in Los Angeles",
+        "score" : 0.82651407
+      }, {
+        "id" : "aguvis_aitw_general_14655489025538990003",
+        "instruction" : "What's the weather like in San Francisco?",
+        "score" : 0.8223475
+      }, {
+        "id" : "aguvis_aitw_general_154322127451137180",
+        "instruction" : "Search for flights from NYC to Tokyo",
+        "score" : 0.8115853
+      } ]
+    }, {
+      "label" : "city-weather",
+      "queryId" : "aguvis_aitw_general_14655489025538990003",
+      "instruction" : "What's the weather like in San Francisco?",
+      "relevantCount" : 14,
+      "relevantRetrieved" : 3,
+      "recallAtK" : 0.21428571428571427,
+      "precisionAtK" : 0.6,
+      "firstRelevantRank" : 1,
+      "reciprocalRank" : 1.0,
+      "latencyMicros" : 4602,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_5785434926384995436",
+        "instruction" : "What's the weather like in Rio de Janeiro?",
+        "score" : 0.90259564
+      }, {
+        "id" : "aguvis_aitw_general_4395661943537609252",
+        "instruction" : "What's the weather like in Seoul?",
+        "score" : 0.89925545
+      }, {
+        "id" : "aguvis_aitw_general_13100191455285533715",
+        "instruction" : "What's the weather like in New York?",
+        "score" : 0.8962812
+      }, {
+        "id" : "aguvis_aitw_general_12917350239950899516",
+        "instruction" : "What's the news in Bangladesh?",
+        "score" : 0.8944431
+      }, {
+        "id" : "aguvis_aitw_general_1556852964889758627",
+        "instruction" : "What's a good restaurant in Portland?",
+        "score" : 0.8925084
+      } ]
+    }, {
+      "label" : "city-weather",
+      "queryId" : "aguvis_aitw_general_14711595043151676038",
+      "instruction" : "What's the weather like in Chicago?",
+      "relevantCount" : 14,
+      "relevantRetrieved" : 3,
+      "recallAtK" : 0.21428571428571427,
+      "precisionAtK" : 0.6,
+      "firstRelevantRank" : 1,
+      "reciprocalRank" : 1.0,
+      "latencyMicros" : 790,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_3455094102689058097",
+        "instruction" : "What's the weather like in Sydney?",
+        "score" : 0.8921379
+      }, {
+        "id" : "aguvis_aitw_general_728772179473267718",
+        "instruction" : "What's the weather like in Beijing?",
+        "score" : 0.8885335
+      }, {
+        "id" : "aguvis_aitw_general_5785434926384995436",
+        "instruction" : "What's the weather like in Rio de Janeiro?",
+        "score" : 0.8792918
+      }, {
+        "id" : "aguvis_aitw_general_1459760647753191721",
+        "instruction" : "What's a good restaurant in Houston?",
+        "score" : 0.8734631
+      }, {
+        "id" : "aguvis_aitw_general_5495846382180137273",
+        "instruction" : "What's a good restaurant in Dallas?",
+        "score" : 0.8702687
+      } ]
+    }, {
+      "label" : "city-weather",
+      "queryId" : "aguvis_aitw_general_2079410060458460055",
+      "instruction" : "What's the weather like in Mexico City?",
+      "relevantCount" : 14,
+      "relevantRetrieved" : 3,
+      "recallAtK" : 0.21428571428571427,
+      "precisionAtK" : 0.6,
+      "firstRelevantRank" : 1,
+      "reciprocalRank" : 1.0,
+      "latencyMicros" : 525,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_4395661943537609252",
+        "instruction" : "What's the weather like in Seoul?",
+        "score" : 0.9167867
+      }, {
+        "id" : "aguvis_aitw_general_7061705080102068828",
+        "instruction" : "What's the weather like in Paris?",
+        "score" : 0.91095597
+      }, {
+        "id" : "aguvis_aitw_general_6650496638041230411",
+        "instruction" : "Search for flights from Mexico city to Seattle",
+        "score" : 0.9063605
+      }, {
+        "id" : "aguvis_aitw_general_14476184548228692531",
+        "instruction" : "What's the weather like inToronto?",
+        "score" : 0.89752483
+      }, {
+        "id" : "aguvis_aitw_general_8356723694870216517",
+        "instruction" : "Search for hotels in Mexico city",
+        "score" : 0.89741886
+      } ]
+    }, {
+      "label" : "city-weather",
+      "queryId" : "aguvis_aitw_general_5785434926384995436",
+      "instruction" : "What's the weather like in Rio de Janeiro?",
+      "relevantCount" : 14,
+      "relevantRetrieved" : 3,
+      "recallAtK" : 0.21428571428571427,
+      "precisionAtK" : 0.6,
+      "firstRelevantRank" : 3,
+      "reciprocalRank" : 0.3333333333333333,
+      "latencyMicros" : 551,
+      "results" : [ {
+        "id" : "aguvis_aitw_general_12917350239950899516",
+        "instruction" : "What's the news in Bangladesh?",
+        "score" : 0.91642433
+      }, {
+        "id" : "aguvis_aitw_general_6980669721154406623",
+        "instruction" : "What's on the menu at In-N-Out?",
+        "score" : 0.9145697
+      }, {
+        "id" : "aguvis_aitw_general_4395661943537609252",
+        "instruction" : "What's the weather like in Seoul?",
+        "score" : 0.91059816
+      }, {
+        "id" : "aguvis_aitw_general_13100191455285533715",
+        "instruction" : "What's the weather like in New York?",
+        "score" : 0.90381
+      }, {
+        "id" : "aguvis_aitw_general_14655489025538990003",
+        "instruction" : "What's the weather like in San Francisco?",
+        "score" : 0.90259564
+      } ]
+    } ]
+  },
+  "deduplication" : {
+    "threshold" : 0.92,
+    "labeledPairCount" : 241,
+    "truePositive" : 3,
+    "falsePositive" : 2,
+    "trueNegative" : 195,
+    "falseNegative" : 41,
+    "precision" : 0.6,
+    "recall" : 0.06818181818181818,
+    "f1" : 0.1224489795918367,
+    "calibratedBest" : {
+      "threshold" : 0.8,
+      "truePositive" : 39,
+      "falsePositive" : 12,
+      "trueNegative" : 185,
+      "falseNegative" : 5,
+      "precision" : 0.7647058823529411,
+      "recall" : 0.8863636363636364,
+      "f1" : 0.8210526315789474
+    },
+    "thresholdSweep" : [ {
+      "threshold" : 0.6,
+      "truePositive" : 44,
+      "falsePositive" : 173,
+      "trueNegative" : 24,
+      "falseNegative" : 0,
+      "precision" : 0.20276497695852536,
+      "recall" : 1.0,
+      "f1" : 0.3371647509578544
+    }, {
+      "threshold" : 0.61,
+      "truePositive" : 44,
+      "falsePositive" : 164,
+      "trueNegative" : 33,
+      "falseNegative" : 0,
+      "precision" : 0.21153846153846154,
+      "recall" : 1.0,
+      "f1" : 0.34920634920634924
+    }, {
+      "threshold" : 0.62,
+      "truePositive" : 44,
+      "falsePositive" : 160,
+      "trueNegative" : 37,
+      "falseNegative" : 0,
+      "precision" : 0.21568627450980393,
+      "recall" : 1.0,
+      "f1" : 0.3548387096774193
+    }, {
+      "threshold" : 0.63,
+      "truePositive" : 44,
+      "falsePositive" : 152,
+      "trueNegative" : 45,
+      "falseNegative" : 0,
+      "precision" : 0.22448979591836735,
+      "recall" : 1.0,
+      "f1" : 0.36666666666666664
+    }, {
+      "threshold" : 0.64,
+      "truePositive" : 44,
+      "falsePositive" : 138,
+      "trueNegative" : 59,
+      "falseNegative" : 0,
+      "precision" : 0.24175824175824176,
+      "recall" : 1.0,
+      "f1" : 0.3893805309734513
+    }, {
+      "threshold" : 0.65,
+      "truePositive" : 44,
+      "falsePositive" : 129,
+      "trueNegative" : 68,
+      "falseNegative" : 0,
+      "precision" : 0.2543352601156069,
+      "recall" : 1.0,
+      "f1" : 0.40552995391705066
+    }, {
+      "threshold" : 0.66,
+      "truePositive" : 44,
+      "falsePositive" : 115,
+      "trueNegative" : 82,
+      "falseNegative" : 0,
+      "precision" : 0.27672955974842767,
+      "recall" : 1.0,
+      "f1" : 0.43349753694581283
+    }, {
+      "threshold" : 0.67,
+      "truePositive" : 44,
+      "falsePositive" : 109,
+      "trueNegative" : 88,
+      "falseNegative" : 0,
+      "precision" : 0.2875816993464052,
+      "recall" : 1.0,
+      "f1" : 0.4467005076142132
+    }, {
+      "threshold" : 0.68,
+      "truePositive" : 44,
+      "falsePositive" : 96,
+      "trueNegative" : 101,
+      "falseNegative" : 0,
+      "precision" : 0.3142857142857143,
+      "recall" : 1.0,
+      "f1" : 0.4782608695652174
+    }, {
+      "threshold" : 0.69,
+      "truePositive" : 44,
+      "falsePositive" : 88,
+      "trueNegative" : 109,
+      "falseNegative" : 0,
+      "precision" : 0.3333333333333333,
+      "recall" : 1.0,
+      "f1" : 0.5
+    }, {
+      "threshold" : 0.7,
+      "truePositive" : 44,
+      "falsePositive" : 80,
+      "trueNegative" : 117,
+      "falseNegative" : 0,
+      "precision" : 0.3548387096774194,
+      "recall" : 1.0,
+      "f1" : 0.5238095238095238
+    }, {
+      "threshold" : 0.71,
+      "truePositive" : 44,
+      "falsePositive" : 66,
+      "trueNegative" : 131,
+      "falseNegative" : 0,
+      "precision" : 0.4,
+      "recall" : 1.0,
+      "f1" : 0.5714285714285715
+    }, {
+      "threshold" : 0.72,
+      "truePositive" : 44,
+      "falsePositive" : 56,
+      "trueNegative" : 141,
+      "falseNegative" : 0,
+      "precision" : 0.44,
+      "recall" : 1.0,
+      "f1" : 0.6111111111111112
+    }, {
+      "threshold" : 0.73,
+      "truePositive" : 44,
+      "falsePositive" : 47,
+      "trueNegative" : 150,
+      "falseNegative" : 0,
+      "precision" : 0.4835164835164835,
+      "recall" : 1.0,
+      "f1" : 0.6518518518518518
+    }, {
+      "threshold" : 0.74,
+      "truePositive" : 44,
+      "falsePositive" : 40,
+      "trueNegative" : 157,
+      "falseNegative" : 0,
+      "precision" : 0.5238095238095238,
+      "recall" : 1.0,
+      "f1" : 0.6875000000000001
+    }, {
+      "threshold" : 0.75,
+      "truePositive" : 44,
+      "falsePositive" : 37,
+      "trueNegative" : 160,
+      "falseNegative" : 0,
+      "precision" : 0.5432098765432098,
+      "recall" : 1.0,
+      "f1" : 0.704
+    }, {
+      "threshold" : 0.76,
+      "truePositive" : 43,
+      "falsePositive" : 31,
+      "trueNegative" : 166,
+      "falseNegative" : 1,
+      "precision" : 0.581081081081081,
+      "recall" : 0.9772727272727273,
+      "f1" : 0.728813559322034
+    }, {
+      "threshold" : 0.77,
+      "truePositive" : 42,
+      "falsePositive" : 25,
+      "trueNegative" : 172,
+      "falseNegative" : 2,
+      "precision" : 0.6268656716417911,
+      "recall" : 0.9545454545454546,
+      "f1" : 0.7567567567567568
+    }, {
+      "threshold" : 0.78,
+      "truePositive" : 42,
+      "falsePositive" : 18,
+      "trueNegative" : 179,
+      "falseNegative" : 2,
+      "precision" : 0.7,
+      "recall" : 0.9545454545454546,
+      "f1" : 0.8076923076923077
+    }, {
+      "threshold" : 0.79,
+      "truePositive" : 40,
+      "falsePositive" : 15,
+      "trueNegative" : 182,
+      "falseNegative" : 4,
+      "precision" : 0.7272727272727273,
+      "recall" : 0.9090909090909091,
+      "f1" : 0.8080808080808082
+    }, {
+      "threshold" : 0.8,
+      "truePositive" : 39,
+      "falsePositive" : 12,
+      "trueNegative" : 185,
+      "falseNegative" : 5,
+      "precision" : 0.7647058823529411,
+      "recall" : 0.8863636363636364,
+      "f1" : 0.8210526315789474
+    }, {
+      "threshold" : 0.81,
+      "truePositive" : 37,
+      "falsePositive" : 10,
+      "trueNegative" : 187,
+      "falseNegative" : 7,
+      "precision" : 0.7872340425531915,
+      "recall" : 0.8409090909090909,
+      "f1" : 0.8131868131868133
+    }, {
+      "threshold" : 0.82,
+      "truePositive" : 33,
+      "falsePositive" : 9,
+      "trueNegative" : 188,
+      "falseNegative" : 11,
+      "precision" : 0.7857142857142857,
+      "recall" : 0.75,
+      "f1" : 0.7674418604651163
+    }, {
+      "threshold" : 0.83,
+      "truePositive" : 30,
+      "falsePositive" : 8,
+      "trueNegative" : 189,
+      "falseNegative" : 14,
+      "precision" : 0.7894736842105263,
+      "recall" : 0.6818181818181818,
+      "f1" : 0.7317073170731707
+    }, {
+      "threshold" : 0.84,
+      "truePositive" : 27,
+      "falsePositive" : 6,
+      "trueNegative" : 191,
+      "falseNegative" : 17,
+      "precision" : 0.8181818181818182,
+      "recall" : 0.6136363636363636,
+      "f1" : 0.7012987012987013
+    }, {
+      "threshold" : 0.85,
+      "truePositive" : 23,
+      "falsePositive" : 5,
+      "trueNegative" : 192,
+      "falseNegative" : 21,
+      "precision" : 0.8214285714285714,
+      "recall" : 0.5227272727272727,
+      "f1" : 0.6388888888888888
+    }, {
+      "threshold" : 0.86,
+      "truePositive" : 20,
+      "falsePositive" : 4,
+      "trueNegative" : 193,
+      "falseNegative" : 24,
+      "precision" : 0.8333333333333334,
+      "recall" : 0.45454545454545453,
+      "f1" : 0.5882352941176471
+    }, {
+      "threshold" : 0.87,
+      "truePositive" : 16,
+      "falsePositive" : 4,
+      "trueNegative" : 193,
+      "falseNegative" : 28,
+      "precision" : 0.8,
+      "recall" : 0.36363636363636365,
+      "f1" : 0.5000000000000001
+    }, {
+      "threshold" : 0.88,
+      "truePositive" : 13,
+      "falsePositive" : 3,
+      "trueNegative" : 194,
+      "falseNegative" : 31,
+      "precision" : 0.8125,
+      "recall" : 0.29545454545454547,
+      "f1" : 0.4333333333333334
+    }, {
+      "threshold" : 0.89,
+      "truePositive" : 11,
+      "falsePositive" : 3,
+      "trueNegative" : 194,
+      "falseNegative" : 33,
+      "precision" : 0.7857142857142857,
+      "recall" : 0.25,
+      "f1" : 0.37931034482758624
+    }, {
+      "threshold" : 0.9,
+      "truePositive" : 8,
+      "falsePositive" : 2,
+      "trueNegative" : 195,
+      "falseNegative" : 36,
+      "precision" : 0.8,
+      "recall" : 0.18181818181818182,
+      "f1" : 0.2962962962962963
+    }, {
+      "threshold" : 0.91,
+      "truePositive" : 6,
+      "falsePositive" : 2,
+      "trueNegative" : 195,
+      "falseNegative" : 38,
+      "precision" : 0.75,
+      "recall" : 0.13636363636363635,
+      "f1" : 0.23076923076923075
+    }, {
+      "threshold" : 0.92,
+      "truePositive" : 3,
+      "falsePositive" : 2,
+      "trueNegative" : 195,
+      "falseNegative" : 41,
+      "precision" : 0.6,
+      "recall" : 0.06818181818181818,
+      "f1" : 0.1224489795918367
+    }, {
+      "threshold" : 0.93,
+      "truePositive" : 1,
+      "falsePositive" : 1,
+      "trueNegative" : 196,
+      "falseNegative" : 43,
+      "precision" : 0.5,
+      "recall" : 0.022727272727272728,
+      "f1" : 0.04347826086956522
+    }, {
+      "threshold" : 0.94,
+      "truePositive" : 1,
+      "falsePositive" : 0,
+      "trueNegative" : 197,
+      "falseNegative" : 43,
+      "precision" : 1.0,
+      "recall" : 0.022727272727272728,
+      "f1" : 0.044444444444444446
+    }, {
+      "threshold" : 0.95,
+      "truePositive" : 0,
+      "falsePositive" : 0,
+      "trueNegative" : 197,
+      "falseNegative" : 44,
+      "precision" : 0.0,
+      "recall" : 0.0,
+      "f1" : 0.0
+    }, {
+      "threshold" : 0.96,
+      "truePositive" : 0,
+      "falsePositive" : 0,
+      "trueNegative" : 197,
+      "falseNegative" : 44,
+      "precision" : 0.0,
+      "recall" : 0.0,
+      "f1" : 0.0
+    }, {
+      "threshold" : 0.97,
+      "truePositive" : 0,
+      "falsePositive" : 0,
+      "trueNegative" : 197,
+      "falseNegative" : 44,
+      "precision" : 0.0,
+      "recall" : 0.0,
+      "f1" : 0.0
+    }, {
+      "threshold" : 0.98,
+      "truePositive" : 0,
+      "falsePositive" : 0,
+      "trueNegative" : 197,
+      "falseNegative" : 44,
+      "precision" : 0.0,
+      "recall" : 0.0,
+      "f1" : 0.0
+    }, {
+      "threshold" : 0.99,
+      "truePositive" : 0,
+      "falsePositive" : 0,
+      "trueNegative" : 197,
+      "falseNegative" : 44,
+      "precision" : 0.0,
+      "recall" : 0.0,
+      "f1" : 0.0
+    } ],
+    "errors" : [ {
+      "errorType" : "false-positive",
+      "label" : "Calendar queries request different date ranges.",
+      "leftId" : "aguvis_aitw_general_13849500146321253403",
+      "leftInstruction" : "What's on my calendar for the rest of the week?",
+      "rightId" : "aguvis_aitw_general_9418234309534533390",
+      "rightInstruction" : "What's on my calendar for the rest of the month?",
+      "similarity" : 0.9343715
+    }, {
+      "errorType" : "false-positive",
+      "label" : "Same alarm family but different requested time.",
+      "leftId" : "aguvis_aitw_general_10039701842972332757",
+      "leftInstruction" : "Set an alarmfor 5pm",
+      "rightId" : "aguvis_aitw_general_18104307305906496809",
+      "rightInstruction" : "Set an alarm for 11am",
+      "similarity" : 0.92986876
+    }, {
+      "errorType" : "false-negative",
+      "label" : "check-gmail",
+      "leftId" : "aguvis_aitw_general_140488292855254340",
+      "leftInstruction" : "Check my gmail inbox",
+      "rightId" : "aguvis_aitw_general_17655094788105351189",
+      "rightInstruction" : "Check my gmail",
+      "similarity" : 0.91533
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_1974545209938798471",
+      "leftInstruction" : "Open a new Chrome incognito window",
+      "rightId" : "aguvis_aitw_general_6814581428117316762",
+      "rightInstruction" : "Open a new incognito window in Chrome",
+      "similarity" : 0.9129422
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_13359924215551397870",
+      "leftInstruction" : "Open a new incognito window in the chrome app",
+      "rightId" : "aguvis_aitw_general_8750195523394762979",
+      "rightInstruction" : "Open a new incognito tab in the chrome app",
+      "similarity" : 0.91276103
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_13359924215551397870",
+      "leftInstruction" : "Open a new incognito window in the chrome app",
+      "rightId" : "aguvis_aitw_general_2638804768416157634",
+      "rightInstruction" : "Open a new private window in the chrome app",
+      "similarity" : 0.9076704
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_16536092761588121132",
+      "leftInstruction" : "Open a new private tab in Chrome",
+      "rightId" : "aguvis_aitw_general_2638804768416157634",
+      "rightInstruction" : "Open a new private window in the chrome app",
+      "similarity" : 0.90318197
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_12067343550265637689",
+      "leftInstruction" : "Open a new Chrome incognito tab",
+      "rightId" : "aguvis_aitw_general_1974545209938798471",
+      "rightInstruction" : "Open a new Chrome incognito window",
+      "similarity" : 0.8981186
+    }, {
+      "errorType" : "false-negative",
+      "label" : "check-gmail",
+      "leftId" : "aguvis_aitw_general_17655094788105351189",
+      "leftInstruction" : "Check my gmail",
+      "rightId" : "aguvis_aitw_general_6143400729920005878",
+      "rightInstruction" : "Check my email",
+      "similarity" : 0.8971208
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_2638804768416157634",
+      "leftInstruction" : "Open a new private window in the chrome app",
+      "rightId" : "aguvis_aitw_general_8750195523394762979",
+      "rightInstruction" : "Open a new incognito tab in the chrome app",
+      "similarity" : 0.89020985
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_13359924215551397870",
+      "leftInstruction" : "Open a new incognito window in the chrome app",
+      "rightId" : "aguvis_aitw_general_1974545209938798471",
+      "rightInstruction" : "Open a new Chrome incognito window",
+      "similarity" : 0.88703907
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_2638804768416157634",
+      "leftInstruction" : "Open a new private window in the chrome app",
+      "rightId" : "aguvis_aitw_general_4575780911025792730",
+      "rightInstruction" : "Open a new private window in Chrome",
+      "similarity" : 0.88361275
+    }, {
+      "errorType" : "false-negative",
+      "label" : "open-wifi-settings",
+      "leftId" : "aguvis_aitw_googleapps_11756518469603048957",
+      "leftInstruction" : "Open wifi settings",
+      "rightId" : "aguvis_aitw_googleapps_13671528363908158842",
+      "rightInstruction" : "open wifi settings",
+      "similarity" : 0.8750798
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_16536092761588121132",
+      "leftInstruction" : "Open a new private tab in Chrome",
+      "rightId" : "aguvis_aitw_general_1974545209938798471",
+      "rightInstruction" : "Open a new Chrome incognito window",
+      "similarity" : 0.8747114
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_2638804768416157634",
+      "leftInstruction" : "Open a new private window in the chrome app",
+      "rightId" : "aguvis_aitw_general_6814581428117316762",
+      "rightInstruction" : "Open a new incognito window in Chrome",
+      "similarity" : 0.87050056
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_1974545209938798471",
+      "leftInstruction" : "Open a new Chrome incognito window",
+      "rightId" : "aguvis_aitw_general_2638804768416157634",
+      "rightInstruction" : "Open a new private window in the chrome app",
+      "similarity" : 0.86796993
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_16536092761588121132",
+      "leftInstruction" : "Open a new private tab in Chrome",
+      "rightId" : "aguvis_aitw_general_3920541555994061393",
+      "rightInstruction" : "Open a new Chrome private tab",
+      "similarity" : 0.8672726
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_12067343550265637689",
+      "leftInstruction" : "Open a new Chrome incognito tab",
+      "rightId" : "aguvis_aitw_general_6814581428117316762",
+      "rightInstruction" : "Open a new incognito window in Chrome",
+      "similarity" : 0.864151
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_6814581428117316762",
+      "leftInstruction" : "Open a new incognito window in Chrome",
+      "rightId" : "aguvis_aitw_general_8750195523394762979",
+      "rightInstruction" : "Open a new incognito tab in the chrome app",
+      "similarity" : 0.8626003
+    }, {
+      "errorType" : "false-negative",
+      "label" : "chrome-private-browsing",
+      "leftId" : "aguvis_aitw_general_16536092761588121132",
+      "leftInstruction" : "Open a new private tab in Chrome",
+      "rightId" : "aguvis_aitw_general_4575780911025792730",
+      "rightInstruction" : "Open a new private window in Chrome",
+      "similarity" : 0.85741025
+    } ]
+  }
+}

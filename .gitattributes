@@ -1,0 +1,8 @@
+* text=auto
+*.java text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.cmd text eol=crlf
+sample-data/*.json linguist-generated=true
+reports/*.json linguist-generated=true

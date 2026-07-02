@@ -1,0 +1,242 @@
+{
+  "name": "AGUVIS-500 intent retrieval and deduplication labels",
+  "version": "1.0",
+  "annotationPolicy": "Retrieval groups share a task family even when slot values differ. Duplicate groups require the same requested end state. Negative pairs deliberately differ in a slot value, target, or privacy mode.",
+  "retrievalGroups": [
+    {
+      "label": "set-alarm",
+      "rationale": "Set an alarm; requested times may differ.",
+      "memberIds": [
+        "aguvis_aitw_general_10039701842972332757",
+        "aguvis_aitw_general_13725475726512988244",
+        "aguvis_aitw_general_18104307305906496809",
+        "aguvis_aitw_general_2824133379378729701",
+        "aguvis_aitw_general_3927173729863126289",
+        "aguvis_aitw_general_6271175289399993355",
+        "aguvis_aitw_general_825030933088533866",
+        "aguvis_aitw_general_8933780522293807647",
+        "aguvis_aitw_general_8973233299967733059",
+        "aguvis_aitw_general_9410141523664212867"
+      ]
+    },
+    {
+      "label": "city-weather",
+      "rationale": "Ask for current weather in a named city.",
+      "memberIds": [
+        "aguvis_aitw_general_10342470313437605382",
+        "aguvis_aitw_general_12735674421312260299",
+        "aguvis_aitw_general_13100191455285533715",
+        "aguvis_aitw_general_13190589746115177329",
+        "aguvis_aitw_general_14476184548228692531",
+        "aguvis_aitw_general_14655489025538990003",
+        "aguvis_aitw_general_14711595043151676038",
+        "aguvis_aitw_general_16931346741008740638",
+        "aguvis_aitw_general_17825426406750953274",
+        "aguvis_aitw_general_2079410060458460055",
+        "aguvis_aitw_general_3455094102689058097",
+        "aguvis_aitw_general_4395661943537609252",
+        "aguvis_aitw_general_5785434926384995436",
+        "aguvis_aitw_general_7061705080102068828",
+        "aguvis_aitw_general_728772179473267718"
+      ]
+    },
+    {
+      "label": "youtube-new-artist-video",
+      "rationale": "Play a new music video by a named artist on YouTube.",
+      "memberIds": [
+        "aguvis_aitw_general_14312657843578969247",
+        "aguvis_aitw_general_16489501408471779461",
+        "aguvis_aitw_general_16513712811653332070",
+        "aguvis_aitw_general_18150845093135239908",
+        "aguvis_aitw_general_1942160784259185980",
+        "aguvis_aitw_general_6181284283192538961",
+        "aguvis_aitw_general_6780639571836497141",
+        "aguvis_aitw_general_7830558818307796721",
+        "aguvis_aitw_general_9823489232589122831"
+      ]
+    },
+    {
+      "label": "chrome-private-browsing",
+      "rationale": "Open a new incognito/private browsing context in Chrome.",
+      "memberIds": [
+        "aguvis_aitw_general_12067343550265637689",
+        "aguvis_aitw_general_13359924215551397870",
+        "aguvis_aitw_general_16536092761588121132",
+        "aguvis_aitw_general_1974545209938798471",
+        "aguvis_aitw_general_2638804768416157634",
+        "aguvis_aitw_general_3920541555994061393",
+        "aguvis_aitw_general_4575780911025792730",
+        "aguvis_aitw_general_6814581428117316762",
+        "aguvis_aitw_general_8750195523394762979"
+      ]
+    },
+    {
+      "label": "check-gmail",
+      "rationale": "Open or inspect the Gmail inbox.",
+      "memberIds": [
+        "aguvis_aitw_general_140488292855254340",
+        "aguvis_aitw_general_17655094788105351189",
+        "aguvis_aitw_general_6143400729920005878"
+      ]
+    },
+    {
+      "label": "open-contacts",
+      "rationale": "Open the Contacts application.",
+      "memberIds": [
+        "aguvis_aitw_general_17952721151425091944",
+        "aguvis_aitw_general_18394662018573618408"
+      ]
+    },
+    {
+      "label": "latest-tech-news",
+      "rationale": "Request the latest technology news.",
+      "memberIds": [
+        "aguvis_aitw_general_18107613326578095012",
+        "aguvis_aitw_general_9710163668547095407"
+      ]
+    },
+    {
+      "label": "burger-search-maps",
+      "rationale": "Search Maps for a good or highly rated burger restaurant.",
+      "memberIds": [
+        "aguvis_aitw_general_10697484407812183269",
+        "aguvis_aitw_general_16429259049941881261",
+        "aguvis_aitw_general_3747125767618087904"
+      ]
+    },
+    {
+      "label": "open-calendar",
+      "rationale": "Open the Calendar application without requesting a date view.",
+      "memberIds": [
+        "aguvis_aitw_general_12954096416707566752",
+        "aguvis_aitw_general_4072036773080449144"
+      ]
+    },
+    {
+      "label": "open-wifi-settings",
+      "rationale": "Open Wi-Fi settings.",
+      "memberIds": [
+        "aguvis_aitw_googleapps_11756518469603048957",
+        "aguvis_aitw_googleapps_13671528363908158842"
+      ]
+    }
+  ],
+  "duplicateGroups": [
+    {
+      "label": "chrome-private-browsing",
+      "rationale": "Equivalent request to open a new private browsing context.",
+      "memberIds": [
+        "aguvis_aitw_general_12067343550265637689",
+        "aguvis_aitw_general_13359924215551397870",
+        "aguvis_aitw_general_16536092761588121132",
+        "aguvis_aitw_general_1974545209938798471",
+        "aguvis_aitw_general_2638804768416157634",
+        "aguvis_aitw_general_3920541555994061393",
+        "aguvis_aitw_general_4575780911025792730",
+        "aguvis_aitw_general_6814581428117316762",
+        "aguvis_aitw_general_8750195523394762979"
+      ]
+    },
+    {
+      "label": "check-gmail",
+      "rationale": "Equivalent request to inspect email/Gmail.",
+      "memberIds": [
+        "aguvis_aitw_general_140488292855254340",
+        "aguvis_aitw_general_17655094788105351189",
+        "aguvis_aitw_general_6143400729920005878"
+      ]
+    },
+    {
+      "label": "open-contacts",
+      "rationale": "Equivalent request to open Contacts.",
+      "memberIds": [
+        "aguvis_aitw_general_17952721151425091944",
+        "aguvis_aitw_general_18394662018573618408"
+      ]
+    },
+    {
+      "label": "latest-tech-news",
+      "rationale": "Equivalent request for the latest technology news.",
+      "memberIds": [
+        "aguvis_aitw_general_18107613326578095012",
+        "aguvis_aitw_general_9710163668547095407"
+      ]
+    },
+    {
+      "label": "burger-search-maps",
+      "rationale": "Equivalent search for highly rated burger restaurants on Maps.",
+      "memberIds": [
+        "aguvis_aitw_general_16429259049941881261",
+        "aguvis_aitw_general_3747125767618087904"
+      ]
+    },
+    {
+      "label": "open-calendar",
+      "rationale": "Equivalent request to open Calendar.",
+      "memberIds": [
+        "aguvis_aitw_general_12954096416707566752",
+        "aguvis_aitw_general_4072036773080449144"
+      ]
+    },
+    {
+      "label": "open-wifi-settings",
+      "rationale": "Equivalent request to open Wi-Fi settings.",
+      "memberIds": [
+        "aguvis_aitw_googleapps_11756518469603048957",
+        "aguvis_aitw_googleapps_13671528363908158842"
+      ]
+    }
+  ],
+  "negativePairs": [
+    {
+      "leftId": "aguvis_aitw_general_10039701842972332757",
+      "rightId": "aguvis_aitw_general_18104307305906496809",
+      "rationale": "Same alarm family but different requested time."
+    },
+    {
+      "leftId": "aguvis_aitw_general_2824133379378729701",
+      "rightId": "aguvis_aitw_general_9410141523664212867",
+      "rationale": "Same alarm family but different requested time."
+    },
+    {
+      "leftId": "aguvis_aitw_general_10342470313437605382",
+      "rightId": "aguvis_aitw_general_12735674421312260299",
+      "rationale": "Same weather family but different city."
+    },
+    {
+      "leftId": "aguvis_aitw_general_13100191455285533715",
+      "rightId": "aguvis_aitw_general_14655489025538990003",
+      "rationale": "Same weather family but different city."
+    },
+    {
+      "leftId": "aguvis_aitw_general_14312657843578969247",
+      "rightId": "aguvis_aitw_general_16489501408471779461",
+      "rationale": "Same YouTube family but different artist."
+    },
+    {
+      "leftId": "aguvis_aitw_general_16513712811653332070",
+      "rightId": "aguvis_aitw_general_18150845093135239908",
+      "rationale": "Same YouTube family but different artist."
+    },
+    {
+      "leftId": "aguvis_aitw_general_13849500146321253403",
+      "rightId": "aguvis_aitw_general_9418234309534533390",
+      "rationale": "Calendar queries request different date ranges."
+    },
+    {
+      "leftId": "aguvis_aitw_general_12693930241255467158",
+      "rightId": "aguvis_aitw_general_12067343550265637689",
+      "rationale": "Regular Chrome tab and incognito tab have different privacy states."
+    },
+    {
+      "leftId": "aguvis_aitw_general_12954096416707566752",
+      "rightId": "aguvis_aitw_general_9733956623439718450",
+      "rationale": "Opening Calendar and installing Calendar are different end states."
+    },
+    {
+      "leftId": "aguvis_aitw_googleapps_11756518469603048957",
+      "rightId": "aguvis_aitw_googleapps_15528456317825419299",
+      "rationale": "Opening Wi-Fi settings and toggling Wi-Fi are different actions."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "generatedAt" : "2026-07-01T22:16:50.351461Z",
+  "inputPath" : "sample-data/aguvis-500.json",
+  "outputPath" : "sample-data/aguvis-500-minilm.json",
+  "model" : "sentence-transformers/all-MiniLM-L6-v2-qint8-arm64",
+  "modelPath" : "models/all-MiniLM-L6-v2/model_qint8_arm64.onnx",
+  "modelSha256" : "4278337fd0ff3c68bfb6291042cad8ab363e1d9fbc43dcb499fe91c871902474",
+  "vocabularyPath" : "models/all-MiniLM-L6-v2/vocab.txt",
+  "trajectoryCount" : 500,
+  "embeddingDimension" : 384,
+  "maxSequenceLength" : 256,
+  "batchSize" : 16,
+  "embeddingMillis" : 14681,
+  "trajectoriesPerSecond" : 34.05762550234998,
+  "javaVersion" : "21.0.11",
+  "operatingSystem" : "Mac OS X",
+  "architecture" : "aarch64"
+}

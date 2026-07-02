@@ -1,0 +1,406 @@
+{
+  "name" : "AGUVIS controlled failed-to-successful trajectory pairs",
+  "version" : "1.0",
+  "generatedAt" : "2026-07-02T03:00:48.120835Z",
+  "generationPolicy" : "Create one controlled truncation failure for every trajectory in the retrieval label set. Keep the first two thirds of actions and record all other members of the same intent group as alternative successful targets.",
+  "pairs" : [ {
+    "failureId" : "aguvis_aitw_general_10039701842972332757-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_10039701842972332757",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 12,
+    "remainingActionCount" : 8
+  }, {
+    "failureId" : "aguvis_aitw_general_13725475726512988244-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_13725475726512988244",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_18104307305906496809-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_18104307305906496809",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 15,
+    "remainingActionCount" : 10
+  }, {
+    "failureId" : "aguvis_aitw_general_2824133379378729701-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_2824133379378729701",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 9,
+    "remainingActionCount" : 6
+  }, {
+    "failureId" : "aguvis_aitw_general_3927173729863126289-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_3927173729863126289",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 10,
+    "remainingActionCount" : 6
+  }, {
+    "failureId" : "aguvis_aitw_general_6271175289399993355-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_6271175289399993355",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7
+  }, {
+    "failureId" : "aguvis_aitw_general_825030933088533866-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_825030933088533866",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_8933780522293807647-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_8933780522293807647",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8973233299967733059", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 7,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_8973233299967733059-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_8973233299967733059",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_9410141523664212867" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 6,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_9410141523664212867-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_9410141523664212867",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10039701842972332757", "aguvis_aitw_general_13725475726512988244", "aguvis_aitw_general_18104307305906496809", "aguvis_aitw_general_2824133379378729701", "aguvis_aitw_general_3927173729863126289", "aguvis_aitw_general_6271175289399993355", "aguvis_aitw_general_825030933088533866", "aguvis_aitw_general_8933780522293807647", "aguvis_aitw_general_8973233299967733059" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_10342470313437605382-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_10342470313437605382",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_12735674421312260299-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_12735674421312260299",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 7,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_13100191455285533715-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_13100191455285533715",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 10,
+    "remainingActionCount" : 6
+  }, {
+    "failureId" : "aguvis_aitw_general_13190589746115177329-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_13190589746115177329",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7
+  }, {
+    "failureId" : "aguvis_aitw_general_14476184548228692531-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_14476184548228692531",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_14655489025538990003-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_14655489025538990003",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 7,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_14711595043151676038-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_14711595043151676038",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_16931346741008740638-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_16931346741008740638",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5
+  }, {
+    "failureId" : "aguvis_aitw_general_17825426406750953274-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_17825426406750953274",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_2079410060458460055-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_2079410060458460055",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_3455094102689058097-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_3455094102689058097",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_4395661943537609252-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_4395661943537609252",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5
+  }, {
+    "failureId" : "aguvis_aitw_general_5785434926384995436-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_5785434926384995436",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_7061705080102068828", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 7,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_7061705080102068828-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_7061705080102068828",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_728772179473267718" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_728772179473267718-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_728772179473267718",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10342470313437605382", "aguvis_aitw_general_12735674421312260299", "aguvis_aitw_general_13100191455285533715", "aguvis_aitw_general_13190589746115177329", "aguvis_aitw_general_14476184548228692531", "aguvis_aitw_general_14655489025538990003", "aguvis_aitw_general_14711595043151676038", "aguvis_aitw_general_16931346741008740638", "aguvis_aitw_general_17825426406750953274", "aguvis_aitw_general_2079410060458460055", "aguvis_aitw_general_3455094102689058097", "aguvis_aitw_general_4395661943537609252", "aguvis_aitw_general_5785434926384995436", "aguvis_aitw_general_7061705080102068828" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_14312657843578969247-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_14312657843578969247",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_16489501408471779461-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_16489501408471779461",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_16513712811653332070-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_16513712811653332070",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 16,
+    "remainingActionCount" : 10
+  }, {
+    "failureId" : "aguvis_aitw_general_18150845093135239908-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_18150845093135239908",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 16,
+    "remainingActionCount" : 10
+  }, {
+    "failureId" : "aguvis_aitw_general_1942160784259185980-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_1942160784259185980",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 18,
+    "remainingActionCount" : 12
+  }, {
+    "failureId" : "aguvis_aitw_general_6181284283192538961-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_6181284283192538961",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7
+  }, {
+    "failureId" : "aguvis_aitw_general_6780639571836497141-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_6780639571836497141",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_7830558818307796721", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5
+  }, {
+    "failureId" : "aguvis_aitw_general_7830558818307796721-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_7830558818307796721",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_9823489232589122831" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 6,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_9823489232589122831-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_9823489232589122831",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_14312657843578969247", "aguvis_aitw_general_16489501408471779461", "aguvis_aitw_general_16513712811653332070", "aguvis_aitw_general_18150845093135239908", "aguvis_aitw_general_1942160784259185980", "aguvis_aitw_general_6181284283192538961", "aguvis_aitw_general_6780639571836497141", "aguvis_aitw_general_7830558818307796721" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7
+  }, {
+    "failureId" : "aguvis_aitw_general_12067343550265637689-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_12067343550265637689",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_13359924215551397870-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_13359924215551397870",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_16536092761588121132-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_16536092761588121132",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 6,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_1974545209938798471-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_1974545209938798471",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_2638804768416157634-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_2638804768416157634",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_3920541555994061393-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_3920541555994061393",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_4575780911025792730-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_4575780911025792730",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_6814581428117316762", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_6814581428117316762-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_6814581428117316762",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_8750195523394762979" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_8750195523394762979-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_8750195523394762979",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12067343550265637689", "aguvis_aitw_general_13359924215551397870", "aguvis_aitw_general_16536092761588121132", "aguvis_aitw_general_1974545209938798471", "aguvis_aitw_general_2638804768416157634", "aguvis_aitw_general_3920541555994061393", "aguvis_aitw_general_4575780911025792730", "aguvis_aitw_general_6814581428117316762" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_140488292855254340-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_140488292855254340",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_17655094788105351189", "aguvis_aitw_general_6143400729920005878" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 13,
+    "remainingActionCount" : 8
+  }, {
+    "failureId" : "aguvis_aitw_general_17655094788105351189-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_17655094788105351189",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_140488292855254340", "aguvis_aitw_general_6143400729920005878" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 9,
+    "remainingActionCount" : 6
+  }, {
+    "failureId" : "aguvis_aitw_general_6143400729920005878-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_6143400729920005878",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_140488292855254340", "aguvis_aitw_general_17655094788105351189" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5
+  }, {
+    "failureId" : "aguvis_aitw_general_17952721151425091944-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_17952721151425091944",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_18394662018573618408" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_18394662018573618408-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_18394662018573618408",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_17952721151425091944" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_18107613326578095012-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_18107613326578095012",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_9710163668547095407" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_9710163668547095407-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_9710163668547095407",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_18107613326578095012" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7
+  }, {
+    "failureId" : "aguvis_aitw_general_10697484407812183269-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_10697484407812183269",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_16429259049941881261", "aguvis_aitw_general_3747125767618087904" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_general_16429259049941881261-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_16429259049941881261",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10697484407812183269", "aguvis_aitw_general_3747125767618087904" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3
+  }, {
+    "failureId" : "aguvis_aitw_general_3747125767618087904-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_3747125767618087904",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_10697484407812183269", "aguvis_aitw_general_16429259049941881261" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 6,
+    "remainingActionCount" : 4
+  }, {
+    "failureId" : "aguvis_aitw_general_12954096416707566752-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_12954096416707566752",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_4072036773080449144" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 12,
+    "remainingActionCount" : 8
+  }, {
+    "failureId" : "aguvis_aitw_general_4072036773080449144-failed-truncated",
+    "successfulId" : "aguvis_aitw_general_4072036773080449144",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_general_12954096416707566752" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2
+  }, {
+    "failureId" : "aguvis_aitw_googleapps_11756518469603048957-failed-truncated",
+    "successfulId" : "aguvis_aitw_googleapps_11756518469603048957",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_googleapps_13671528363908158842" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5
+  }, {
+    "failureId" : "aguvis_aitw_googleapps_13671528363908158842-failed-truncated",
+    "successfulId" : "aguvis_aitw_googleapps_13671528363908158842",
+    "alternativeSuccessfulIds" : [ "aguvis_aitw_googleapps_11756518469603048957" ],
+    "failureType" : "truncated-action-sequence",
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5
+  } ]
+}

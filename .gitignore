@@ -1,0 +1,10 @@
+target/
+data/
+work/
+models/**/*.onnx
+.idea/
+.vscode/
+*.iml
+*.log
+.env
+.DS_Store

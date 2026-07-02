@@ -1,0 +1,532 @@
+{
+  "generatedAt" : "2026-07-02T03:00:56.509813Z",
+  "dataPath" : "sample-data/aguvis-500-plus-57-labeled-failures.json",
+  "pairsPath" : "labels/aguvis-labeled-failure-pairs-57.json",
+  "pairSet" : "AGUVIS controlled failed-to-successful trajectory pairs",
+  "pairVersion" : "1.0",
+  "generationPolicy" : "Create one controlled truncation failure for every trajectory in the retrieval label set. Keep the first two thirds of actions and record all other members of the same intent group as alternative successful targets.",
+  "trajectoryCount" : 557,
+  "failureQueryCount" : 57,
+  "k" : 5,
+  "indexBuildMillis" : 255,
+  "parentRecallAt1" : 0.9298245614035088,
+  "parentRecallAtK" : 1.0,
+  "alternativeIntentQueryCount" : 57,
+  "parentExcludedIntentRecallAtK" : 0.5758145363408521,
+  "parentExcludedIntentHitRateAtK" : 1.0,
+  "parentExcludedIntentMeanReciprocalRank" : 0.9181286549707602,
+  "p50LatencyMicros" : 571,
+  "p95LatencyMicros" : 8493,
+  "hardestQueries" : [ {
+    "failureId" : "aguvis_aitw_general_16513712811653332070-failed-truncated",
+    "instruction" : "Play the new Drake video on YouTube",
+    "expectedSuccessfulId" : "aguvis_aitw_general_16513712811653332070",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 8,
+    "alternativesRetrieved" : 2,
+    "alternativeRecallAtK" : 0.25,
+    "firstAlternativeRank" : 4,
+    "reciprocalRank" : 0.25,
+    "latencyMicros" : 536,
+    "originalActionCount" : 16,
+    "remainingActionCount" : 10,
+    "results" : [ {
+      "id" : "aguvis_aitw_googleapps_12320031040442471985",
+      "instruction" : "Play the last video I watched on Youtube",
+      "score" : 0.8444029
+    }, {
+      "id" : "aguvis_aitw_general_15273831274038585554",
+      "instruction" : "Check the settings for the YouTube app",
+      "score" : 0.84162927
+    }, {
+      "id" : "aguvis_aitw_googleapps_14501989816638382708",
+      "instruction" : "Show me popular videos on Youtube",
+      "score" : 0.8327841
+    }, {
+      "id" : "aguvis_aitw_general_9823489232589122831",
+      "instruction" : "Play the new Beyonce video on YouTube",
+      "score" : 0.8310292
+    }, {
+      "id" : "aguvis_aitw_general_6181284283192538961",
+      "instruction" : "Play the new Ed Sheeran video on YouTube",
+      "score" : 0.8271264
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_2638804768416157634-failed-truncated",
+    "instruction" : "Open a new private window in the chrome app",
+    "expectedSuccessfulId" : "aguvis_aitw_general_2638804768416157634",
+    "parentRank" : 2,
+    "alternativeRelevantCount" : 8,
+    "alternativesRetrieved" : 1,
+    "alternativeRecallAtK" : 0.125,
+    "firstAlternativeRank" : 4,
+    "reciprocalRank" : 0.25,
+    "latencyMicros" : 476,
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_3312850887434656874",
+      "instruction" : "Open a new window in the chrome app",
+      "score" : 0.9430711
+    }, {
+      "id" : "aguvis_aitw_googleapps_14518951055111580090",
+      "instruction" : "open a bookmark in the chrome app",
+      "score" : 0.9228848
+    }, {
+      "id" : "aguvis_aitw_googleapps_10540350934368923588",
+      "instruction" : "Open the web browser",
+      "score" : 0.9183042
+    }, {
+      "id" : "aguvis_aitw_general_4575780911025792730",
+      "instruction" : "Open a new private window in Chrome",
+      "score" : 0.90929025
+    }, {
+      "id" : "aguvis_aitw_general_17990035304581257486",
+      "instruction" : "Check the settings for the Google Chrome app",
+      "score" : 0.9061878
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_3920541555994061393-failed-truncated",
+    "instruction" : "Open a new Chrome private tab",
+    "expectedSuccessfulId" : "aguvis_aitw_general_3920541555994061393",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 8,
+    "alternativesRetrieved" : 2,
+    "alternativeRecallAtK" : 0.25,
+    "firstAlternativeRank" : 3,
+    "reciprocalRank" : 0.3333333333333333,
+    "latencyMicros" : 567,
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_17990035304581257486",
+      "instruction" : "Check the settings for the Google Chrome app",
+      "score" : 0.85967547
+    }, {
+      "id" : "aguvis_aitw_googleapps_14518951055111580090",
+      "instruction" : "open a bookmark in the chrome app",
+      "score" : 0.8436589
+    }, {
+      "id" : "aguvis_aitw_general_2638804768416157634",
+      "instruction" : "Open a new private window in the chrome app",
+      "score" : 0.84254074
+    }, {
+      "id" : "aguvis_aitw_general_12693930241255467158",
+      "instruction" : "Open a new tab in the chrome app",
+      "score" : 0.83551985
+    }, {
+      "id" : "aguvis_aitw_general_16536092761588121132",
+      "instruction" : "Open a new private tab in Chrome",
+      "score" : 0.8335462
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_14476184548228692531-failed-truncated",
+    "instruction" : "What's the weather like inToronto?",
+    "expectedSuccessfulId" : "aguvis_aitw_general_14476184548228692531",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 14,
+    "alternativesRetrieved" : 2,
+    "alternativeRecallAtK" : 0.14285714285714285,
+    "firstAlternativeRank" : 2,
+    "reciprocalRank" : 0.5,
+    "latencyMicros" : 917,
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2,
+    "results" : [ {
+      "id" : "aguvis_aitw_googleapps_1532496936708759455",
+      "instruction" : "Go to settings",
+      "score" : 0.76388943
+    }, {
+      "id" : "aguvis_aitw_general_7061705080102068828",
+      "instruction" : "What's the weather like in Paris?",
+      "score" : 0.76114345
+    }, {
+      "id" : "aguvis_aitw_general_4395661943537609252",
+      "instruction" : "What's the weather like in Seoul?",
+      "score" : 0.7598807
+    }, {
+      "id" : "aguvis_aitw_general_9200921213263057143",
+      "instruction" : "Open the clock",
+      "score" : 0.7579623
+    }, {
+      "id" : "aguvis_aitw_googleapps_10561990975151718943",
+      "instruction" : "Is it going to rain tomorrow?",
+      "score" : 0.75613254
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_4575780911025792730-failed-truncated",
+    "instruction" : "Open a new private window in Chrome",
+    "expectedSuccessfulId" : "aguvis_aitw_general_4575780911025792730",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 8,
+    "alternativesRetrieved" : 2,
+    "alternativeRecallAtK" : 0.25,
+    "firstAlternativeRank" : 2,
+    "reciprocalRank" : 0.5,
+    "latencyMicros" : 667,
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_3312850887434656874",
+      "instruction" : "Open a new window in the chrome app",
+      "score" : 0.9220519
+    }, {
+      "id" : "aguvis_aitw_general_2638804768416157634",
+      "instruction" : "Open a new private window in the chrome app",
+      "score" : 0.91086483
+    }, {
+      "id" : "aguvis_aitw_googleapps_14518951055111580090",
+      "instruction" : "open a bookmark in the chrome app",
+      "score" : 0.8944858
+    }, {
+      "id" : "aguvis_aitw_general_16536092761588121132",
+      "instruction" : "Open a new private tab in Chrome",
+      "score" : 0.89215404
+    }, {
+      "id" : "aguvis_aitw_googleapps_10540350934368923588",
+      "instruction" : "Open the web browser",
+      "score" : 0.883127
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_18107613326578095012-failed-truncated",
+    "instruction" : "What's the latest technology news?",
+    "expectedSuccessfulId" : "aguvis_aitw_general_18107613326578095012",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 1,
+    "alternativesRetrieved" : 1,
+    "alternativeRecallAtK" : 1.0,
+    "firstAlternativeRank" : 2,
+    "reciprocalRank" : 0.5,
+    "latencyMicros" : 517,
+    "originalActionCount" : 5,
+    "remainingActionCount" : 3,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_16631420813711325644",
+      "instruction" : "What's the latest news in tech?",
+      "score" : 0.96846825
+    }, {
+      "id" : "aguvis_aitw_general_9710163668547095407",
+      "instruction" : "What's the latest tech news?",
+      "score" : 0.9342233
+    }, {
+      "id" : "aguvis_aitw_general_13371992950472382102",
+      "instruction" : "What's the latest news in space?",
+      "score" : 0.89008087
+    }, {
+      "id" : "aguvis_aitw_general_15368337453840290857",
+      "instruction" : "What's the news this morning?",
+      "score" : 0.8850585
+    }, {
+      "id" : "aguvis_aitw_general_1251914613052200932",
+      "instruction" : "What's the latest news in space science?",
+      "score" : 0.881692
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_9710163668547095407-failed-truncated",
+    "instruction" : "What's the latest tech news?",
+    "expectedSuccessfulId" : "aguvis_aitw_general_9710163668547095407",
+    "parentRank" : 3,
+    "alternativeRelevantCount" : 1,
+    "alternativesRetrieved" : 1,
+    "alternativeRecallAtK" : 1.0,
+    "firstAlternativeRank" : 2,
+    "reciprocalRank" : 0.5,
+    "latencyMicros" : 475,
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_16631420813711325644",
+      "instruction" : "What's the latest news in tech?",
+      "score" : 0.9714775
+    }, {
+      "id" : "aguvis_aitw_general_18107613326578095012",
+      "instruction" : "What's the latest technology news?",
+      "score" : 0.96470296
+    }, {
+      "id" : "aguvis_aitw_general_1251914613052200932",
+      "instruction" : "What's the latest news in space science?",
+      "score" : 0.9072459
+    }, {
+      "id" : "aguvis_aitw_general_13371992950472382102",
+      "instruction" : "What's the latest news in space?",
+      "score" : 0.8932501
+    }, {
+      "id" : "aguvis_aitw_googleapps_10208947416203712213",
+      "instruction" : "What is the recent news?",
+      "score" : 0.89245474
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_googleapps_13671528363908158842-failed-truncated",
+    "instruction" : "open wifi settings",
+    "expectedSuccessfulId" : "aguvis_aitw_googleapps_13671528363908158842",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 1,
+    "alternativesRetrieved" : 1,
+    "alternativeRecallAtK" : 1.0,
+    "firstAlternativeRank" : 2,
+    "reciprocalRank" : 0.5,
+    "latencyMicros" : 565,
+    "originalActionCount" : 8,
+    "remainingActionCount" : 5,
+    "results" : [ {
+      "id" : "aguvis_aitw_googleapps_15528456317825419299",
+      "instruction" : "toggle wifi",
+      "score" : 0.962023
+    }, {
+      "id" : "aguvis_aitw_googleapps_11756518469603048957",
+      "instruction" : "Open wifi settings",
+      "score" : 0.9169245
+    }, {
+      "id" : "aguvis_aitw_googleapps_10392700132576331581",
+      "instruction" : "Open internet settings",
+      "score" : 0.89278555
+    }, {
+      "id" : "aguvis_aitw_googleapps_15554291761058995388",
+      "instruction" : "turn off airplane mode",
+      "score" : 0.8692576
+    }, {
+      "id" : "aguvis_aitw_googleapps_12526340551399407963",
+      "instruction" : "Open network settings",
+      "score" : 0.865401
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_10039701842972332757-failed-truncated",
+    "instruction" : "Set an alarmfor 5pm",
+    "expectedSuccessfulId" : "aguvis_aitw_general_10039701842972332757",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 5,
+    "alternativeRecallAtK" : 0.5555555555555556,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 53111,
+    "originalActionCount" : 12,
+    "remainingActionCount" : 8,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_2824133379378729701",
+      "instruction" : "Set an alarm for 1pm",
+      "score" : 0.9448672
+    }, {
+      "id" : "aguvis_aitw_general_18104307305906496809",
+      "instruction" : "Set an alarm for 11am",
+      "score" : 0.93719006
+    }, {
+      "id" : "aguvis_aitw_general_9410141523664212867",
+      "instruction" : "Set an alarm for 2pm",
+      "score" : 0.93039286
+    }, {
+      "id" : "aguvis_aitw_general_8933780522293807647",
+      "instruction" : "Set an alarm for 6am",
+      "score" : 0.92757684
+    }, {
+      "id" : "aguvis_aitw_general_13725475726512988244",
+      "instruction" : "Set an alarm for 10am",
+      "score" : 0.9269012
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_13725475726512988244-failed-truncated",
+    "instruction" : "Set an alarm for 10am",
+    "expectedSuccessfulId" : "aguvis_aitw_general_13725475726512988244",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 4,
+    "alternativeRecallAtK" : 0.4444444444444444,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 9116,
+    "originalActionCount" : 3,
+    "remainingActionCount" : 2,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_18104307305906496809",
+      "instruction" : "Set an alarm for 11am",
+      "score" : 0.9286504
+    }, {
+      "id" : "aguvis_aitw_googleapps_1168631106254573749",
+      "instruction" : "Show me the alarms in the clock app",
+      "score" : 0.9283521
+    }, {
+      "id" : "aguvis_aitw_general_2824133379378729701",
+      "instruction" : "Set an alarm for 1pm",
+      "score" : 0.9268019
+    }, {
+      "id" : "aguvis_aitw_general_6271175289399993355",
+      "instruction" : "Set an alarm for 12pm",
+      "score" : 0.9107609
+    }, {
+      "id" : "aguvis_aitw_general_10039701842972332757",
+      "instruction" : "Set an alarmfor 5pm",
+      "score" : 0.90798026
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_18104307305906496809-failed-truncated",
+    "instruction" : "Set an alarm for 11am",
+    "expectedSuccessfulId" : "aguvis_aitw_general_18104307305906496809",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 5,
+    "alternativeRecallAtK" : 0.5555555555555556,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 8493,
+    "originalActionCount" : 15,
+    "remainingActionCount" : 10,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_2824133379378729701",
+      "instruction" : "Set an alarm for 1pm",
+      "score" : 0.9457649
+    }, {
+      "id" : "aguvis_aitw_general_13725475726512988244",
+      "instruction" : "Set an alarm for 10am",
+      "score" : 0.9423598
+    }, {
+      "id" : "aguvis_aitw_general_6271175289399993355",
+      "instruction" : "Set an alarm for 12pm",
+      "score" : 0.92778695
+    }, {
+      "id" : "aguvis_aitw_general_10039701842972332757",
+      "instruction" : "Set an alarmfor 5pm",
+      "score" : 0.92382294
+    }, {
+      "id" : "aguvis_aitw_general_8973233299967733059",
+      "instruction" : "Set an alarm for 8am",
+      "score" : 0.9235853
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_2824133379378729701-failed-truncated",
+    "instruction" : "Set an alarm for 1pm",
+    "expectedSuccessfulId" : "aguvis_aitw_general_2824133379378729701",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 4,
+    "alternativeRecallAtK" : 0.4444444444444444,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 8299,
+    "originalActionCount" : 9,
+    "remainingActionCount" : 6,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_13725475726512988244",
+      "instruction" : "Set an alarm for 10am",
+      "score" : 0.9559667
+    }, {
+      "id" : "aguvis_aitw_general_18104307305906496809",
+      "instruction" : "Set an alarm for 11am",
+      "score" : 0.9419098
+    }, {
+      "id" : "aguvis_aitw_googleapps_1168631106254573749",
+      "instruction" : "Show me the alarms in the clock app",
+      "score" : 0.9351773
+    }, {
+      "id" : "aguvis_aitw_general_6271175289399993355",
+      "instruction" : "Set an alarm for 12pm",
+      "score" : 0.92278796
+    }, {
+      "id" : "aguvis_aitw_general_10039701842972332757",
+      "instruction" : "Set an alarmfor 5pm",
+      "score" : 0.9155444
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_3927173729863126289-failed-truncated",
+    "instruction" : "Set an alarm for 7pm",
+    "expectedSuccessfulId" : "aguvis_aitw_general_3927173729863126289",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 5,
+    "alternativeRecallAtK" : 0.5555555555555556,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 7232,
+    "originalActionCount" : 10,
+    "remainingActionCount" : 6,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_2824133379378729701",
+      "instruction" : "Set an alarm for 1pm",
+      "score" : 0.93676084
+    }, {
+      "id" : "aguvis_aitw_general_18104307305906496809",
+      "instruction" : "Set an alarm for 11am",
+      "score" : 0.9349694
+    }, {
+      "id" : "aguvis_aitw_general_13725475726512988244",
+      "instruction" : "Set an alarm for 10am",
+      "score" : 0.9288769
+    }, {
+      "id" : "aguvis_aitw_general_10039701842972332757",
+      "instruction" : "Set an alarmfor 5pm",
+      "score" : 0.9265773
+    }, {
+      "id" : "aguvis_aitw_general_8973233299967733059",
+      "instruction" : "Set an alarm for 8am",
+      "score" : 0.9218865
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_6271175289399993355-failed-truncated",
+    "instruction" : "Set an alarm for 12pm",
+    "expectedSuccessfulId" : "aguvis_aitw_general_6271175289399993355",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 3,
+    "alternativeRecallAtK" : 0.3333333333333333,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 7086,
+    "originalActionCount" : 11,
+    "remainingActionCount" : 7,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_13725475726512988244",
+      "instruction" : "Set an alarm for 10am",
+      "score" : 0.9164151
+    }, {
+      "id" : "aguvis_aitw_general_9200921213263057143",
+      "instruction" : "Open the clock",
+      "score" : 0.90494406
+    }, {
+      "id" : "aguvis_aitw_general_18104307305906496809",
+      "instruction" : "Set an alarm for 11am",
+      "score" : 0.8940216
+    }, {
+      "id" : "aguvis_aitw_general_2824133379378729701",
+      "instruction" : "Set an alarm for 1pm",
+      "score" : 0.8939029
+    }, {
+      "id" : "aguvis_aitw_googleapps_1168631106254573749",
+      "instruction" : "Show me the alarms in the clock app",
+      "score" : 0.8887346
+    } ]
+  }, {
+    "failureId" : "aguvis_aitw_general_825030933088533866-failed-truncated",
+    "instruction" : "Set an alarm for 9am",
+    "expectedSuccessfulId" : "aguvis_aitw_general_825030933088533866",
+    "parentRank" : 1,
+    "alternativeRelevantCount" : 9,
+    "alternativesRetrieved" : 5,
+    "alternativeRecallAtK" : 0.5555555555555556,
+    "firstAlternativeRank" : 1,
+    "reciprocalRank" : 1.0,
+    "latencyMicros" : 7084,
+    "originalActionCount" : 4,
+    "remainingActionCount" : 2,
+    "results" : [ {
+      "id" : "aguvis_aitw_general_13725475726512988244",
+      "instruction" : "Set an alarm for 10am",
+      "score" : 0.9101524
+    }, {
+      "id" : "aguvis_aitw_general_8973233299967733059",
+      "instruction" : "Set an alarm for 8am",
+      "score" : 0.90168965
+    }, {
+      "id" : "aguvis_aitw_general_9410141523664212867",
+      "instruction" : "Set an alarm for 2pm",
+      "score" : 0.89658165
+    }, {
+      "id" : "aguvis_aitw_general_2824133379378729701",
+      "instruction" : "Set an alarm for 1pm",
+      "score" : 0.88829416
+    }, {
+      "id" : "aguvis_aitw_general_10039701842972332757",
+      "instruction" : "Set an alarmfor 5pm",
+      "score" : 0.8826268
+    } ]
+  } ],
+  "limitation" : "Controlled truncation failures test retrieval behavior but are not a substitute for naturally collected failed sessions. The alternative-intent metrics exclude each failure's exact parent trajectory from ranked results."
+}
