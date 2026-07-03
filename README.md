@@ -3,6 +3,114 @@
 AgentTrace is a Java system for searching, inspecting, and deduplicating
 GUI-agent training trajectories with Lucene CPU and NVIDIA cuVS GPU backends.
 
+**Current release:** `v0.2.0`
+
+**Status:** reproducible Java build, published CPU/GPU benchmark, and passing
+GitHub Actions CI
+
+## Project snapshot
+
+| Area | Implementation |
+|---|---|
+| Product problem | Search, failure recovery, filtering, and deduplication for GUI-agent training trajectories |
+| Java stack | Java 21, virtual threads, Maven, Jackson, ONNX Runtime, Java HTTP API |
+| CPU search | Apache Lucene HNSW |
+| GPU search | NVIDIA cuVS exact brute force and CAGRA |
+| GPU integration | Batched Java client to a localhost Python/cuVS worker in Ubuntu/WSL2 |
+| Embeddings | 384-dimensional MiniLM with Java WordPiece tokenization and mean pooling |
+| Data | Public AGUVIS mobile-navigation trajectories; 500 checked-in records and a reproducible 10K benchmark pipeline |
+| Evaluation | Retrieval, duplicate detection, parent-excluded failure recovery, Recall@K, throughput, and latency |
+| Quality | Unit/integration tests, transport retries, resumable imports, machine-readable reports, and CI |
+
+The central engineering question is not simply whether a GPU can run vector
+search. It is whether one Java product interface can support Lucene and cuVS,
+preserve retrieval quality, and expose the conditions under which GPU batching
+actually improves end-to-end performance.
+
+## Verified results
+
+The primary benchmark used 10,000 real AGUVIS trajectories embedded with
+MiniLM, 500 deterministic Top-10 queries, and exact cuVS as ground truth. It
+ran on Windows 11 with an NVIDIA RTX 4070 SUPER through Ubuntu/WSL2 and cuVS
+26.06.
+
+| Backend | Index build | Mean Recall@10 | Batched queries/s | Individual p50 |
+|---|---:|---:|---:|---:|
+| cuVS exact | 1.165 s | 1.0000 | 5,113 | 4.32 ms |
+| Lucene HNSW | 2.436 s | 0.9968 | 3,060 | 0.26 ms |
+| cuVS CAGRA | 1.436 s | 1.0000 | 5,352 | 6.58 ms |
+
+CAGRA delivered approximately **1.75x the warmed batched throughput** of
+Lucene at perfect Recall@10 on this workload. Lucene remained much faster for
+individual requests because it runs in-process and avoids the localhost/WSL2
+boundary. The comparison therefore demonstrates a batching tradeoff, not a
+claim that GPU search is universally faster.
+
+Each timed batch follows an untimed same-shape warm-up. GPU timings include
+JSON serialization and localhost transport. Full results are committed in
+[`reports/windows-cpu-gpu-10000.json`](reports/windows-cpu-gpu-10000.json);
+the 10K MiniLM run embedded 54.4 trajectories/s and is recorded in
+[`reports/windows-minilm-10000-embedding-run.json`](reports/windows-minilm-10000-embedding-run.json).
+
+## Engineering highlights
+
+- Defined a `TrajectorySearchBackend` abstraction with runtime-selectable
+  Lucene, exact cuVS, and CAGRA implementations.
+- Added batched query transport that groups compatible metadata filters and
+  executes one GPU query matrix per group.
+- Preserved a common cosine-search, filtering, statistics, and deduplication
+  contract across CPU and GPU backends.
+- Added exact cuVS ground truth and a reproducible benchmark harness for build
+  time, Recall@K, full-recall rate, throughput, and p50/p95 latency.
+- Built a storage-safe AGUVIS pipeline using Parquet column pruning so text and
+  metadata can be imported without downloading screenshot bytes.
+- Implemented Java-native MiniLM inference, BERT-compatible WordPiece
+  tokenization, mean pooling, and L2 normalization.
+- Hardened cross-language execution with bounded retries, import checkpoints,
+  adaptive row-API page splitting, deterministic query selection, and pinned
+  WSL2/cuVS dependencies.
+- Added human-reviewed labels and controlled failure injection to test whether
+  incomplete trajectories retrieve alternative successful traces rather than
+  only their exact source.
+
+## Resume and portfolio summary
+
+The following wording is intentionally limited to work demonstrated by this
+repository:
+
+**AgentTrace - GPU-Accelerated Vector Search System**
+
+*Java 21, Apache Lucene, NVIDIA cuVS, CAGRA, Python, WSL2, ONNX Runtime*
+
+- Built a Java 21 vector-search and deduplication system integrating Lucene
+  HNSW with NVIDIA cuVS exact and CAGRA backends through a batched
+  Java-to-Python GPU execution path.
+- Benchmarked 10,000 real GUI-agent trajectories across 500 Top-10 queries;
+  achieved 1.0000 Recall@10 and 5.35K queries/s with CAGRA, approximately
+  1.75x the warmed batched throughput of Lucene HNSW.
+- Engineered a reproducible data and reliability pipeline with local MiniLM
+  inference, storage-safe Parquet ingestion, metadata filtering, transport
+  retries, Maven tests, versioned reports, and GitHub Actions CI.
+
+Useful keywords for accurate project indexing: `Java`, `JVM`, `Lucene`,
+`HNSW`, `NVIDIA cuVS`, `CAGRA`, `approximate nearest neighbor search`,
+`vector search systems`, `GPU acceleration`, `performance benchmarking`,
+`cross-language debugging`, `Python`, `WSL2`, `ONNX Runtime`, and `CI/CD`.
+
+## Scope and implementation boundaries
+
+- AgentTrace integrates NVIDIA cuVS; it does **not** implement custom CUDA or
+  C++ kernels.
+- The current GPU path is Java HTTP client -> localhost Python worker -> cuVS
+  in WSL2. It is not yet a direct JNI or Foreign Function and Memory API
+  binding from the JVM.
+- The published scale point is 10K real vectors. The 100K and 1M runs remain
+  future work.
+- Batch and individual-query results are reported separately because transport
+  overhead materially changes the CPU/GPU comparison.
+- The 57 injected failures are controlled evaluation cases, not naturally
+  collected production failures.
+
 ## Motivation
 
 Collecting screenshots and actions is only the first half of building a GUI
@@ -18,7 +126,7 @@ search backend, and exposes search and deduplication operations through a small
 HTTP API. The GPU is an optional scale-up backend, not the reason the product
 exists.
 
-## Current MVP
+## Implemented in v0.2.0
 
 - Java 21
 - Apache Lucene HNSW vector index
@@ -43,6 +151,7 @@ MiniLM semantic version. No screenshots are downloaded.
 
 - `src/`: Java implementation and tests
 - `gpu/`: pinned WSL2/cuVS setup, launcher, and worker
+- `tools/`: text-only AGUVIS Parquet acquisition tooling
 - `sample-data/`: 500 real trajectories plus controlled failure variants
 - `labels/`: human-reviewed intent labels and failure ground truth
 - `reports/`: committed machine-readable CPU and GPU results
@@ -75,6 +184,12 @@ trajectory JSON
                          v
                     HTTP API
 ```
+
+The backend boundary is deliberate. Lucene provides the portable in-process
+baseline. The cuVS worker isolates Linux-only CUDA dependencies while keeping
+the Java API stable, making correctness and transport costs directly
+measurable. A direct JVM-native cuVS integration is a logical future
+optimization rather than something the current architecture silently assumes.
 
 ## Build
 
@@ -262,8 +377,9 @@ current limitations.
 
 The output is not merely a CPU/GPU benchmark. A data engineer can use the
 system to retrieve comparable successful traces, inspect common failure modes,
-and reduce duplicate training examples. Performance and recall measurements
-will later validate whether the implementation scales.
+and reduce duplicate training examples. The committed performance and recall
+measurements validate the current 10K scale point and make the remaining scale
+work explicit.
 
 The current labeled CPU evaluation shows MiniLM improving Recall@5 from 0.460
 to 0.608 and MRR from 0.836 to 0.965 over feature hashing. In a stricter
