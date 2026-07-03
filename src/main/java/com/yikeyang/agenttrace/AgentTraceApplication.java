@@ -44,6 +44,10 @@ public final class AgentTraceApplication {
             RecoveryEvaluationApplication.run(Arrays.copyOfRange(args, 1, args.length));
             return;
         }
+        if (args.length > 0 && "benchmark".equals(args[0])) {
+            BenchmarkApplication.run(Arrays.copyOfRange(args, 1, args.length));
+            return;
+        }
         Map<String, String> options = parseOptions(args);
         Path dataPath = Path.of(options.getOrDefault(
                 "data", "sample-data/trajectories.json"));
@@ -53,12 +57,14 @@ public final class AgentTraceApplication {
         String backendName = options.getOrDefault("backend", "lucene");
         String cuvsUrl = options.getOrDefault(
                 "cuvs-url", CuvsTrajectorySearchBackend.DEFAULT_URL);
+        String cuvsAlgorithm = options.getOrDefault(
+                "cuvs-algorithm", "brute_force");
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<Trajectory> trajectories =
                 new TrajectoryFileLoader(objectMapper).load(dataPath);
         TrajectorySearchBackend backend = SearchBackendFactory.create(
-                backendName, indexPath, cuvsUrl, objectMapper);
+                backendName, indexPath, cuvsUrl, cuvsAlgorithm, objectMapper);
         backend.rebuild(trajectories);
         AgentTraceServer server =
                 new AgentTraceServer(port, backend, trajectories, objectMapper);

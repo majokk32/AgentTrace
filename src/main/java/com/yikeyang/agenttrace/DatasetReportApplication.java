@@ -36,6 +36,8 @@ public final class DatasetReportApplication {
         String backendName = options.getOrDefault("backend", "lucene");
         String cuvsUrl = options.getOrDefault(
                 "cuvs-url", CuvsTrajectorySearchBackend.DEFAULT_URL);
+        String cuvsAlgorithm = options.getOrDefault(
+                "cuvs-algorithm", "brute_force");
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<Trajectory> trajectories =
@@ -49,7 +51,7 @@ public final class DatasetReportApplication {
         Trajectory example = trajectories.getFirst();
         List<SearchResult> exampleResults;
         try (TrajectorySearchBackend searchBackend = SearchBackendFactory.create(
-                backendName, indexPath, cuvsUrl, objectMapper)) {
+                backendName, indexPath, cuvsUrl, cuvsAlgorithm, objectMapper)) {
             searchBackend.rebuild(trajectories);
             buildMillis = elapsedMillis(buildStart);
             backend = searchBackend.stats().backend();

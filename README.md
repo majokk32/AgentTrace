@@ -22,7 +22,8 @@ exists.
 
 - Java 21
 - Apache Lucene HNSW vector index
-- Exact NVIDIA cuVS cosine search through a localhost WSL2 worker
+- Exact and CAGRA NVIDIA cuVS cosine search through a localhost WSL2 worker
+- Batched GPU query transport
 - Local MiniLM semantic embeddings through Java ONNX Runtime
 - BERT-compatible WordPiece tokenization implemented in Java
 - Human-reviewed retrieval and deduplication evaluation
@@ -32,7 +33,7 @@ exists.
 - Near-duplicate grouping with exact cosine verification
 - JSON HTTP API using Java virtual threads
 - Unit tests and a tiny synthetic fixture
-- Runtime-selectable `lucene` and `cuvs` backends
+- Runtime-selectable `lucene`, exact `cuvs`, and `cuvs-cagra` backends
 
 The repository includes two versions of the same 500 public mobile-navigation
 trajectories: a dependency-free feature-hashing baseline and a 384-dimensional
@@ -63,10 +64,10 @@ trajectory JSON
             TrajectorySearchBackend
                  /                 \
                 v                   v
-       Lucene HNSW index     cuVS client (Java)
+       Lucene HNSW index     batched cuVS client (Java)
                                      |
                                      v
-                         WSL2 cuVS GPU worker
+                    WSL2 exact/CAGRA GPU worker
                  \                 /
                   v               v
              similarity search + dedup groups
@@ -93,13 +94,14 @@ On Windows, use `mvnw.cmd test` and `mvnw.cmd package`.
 
 ## Import a storage-safe AGUVIS sample
 
-The importer reads the Hugging Face row API in pages of 100, discards signed
-image URLs, and stores only normalized trajectory content and image counts.
+The importer reads the Hugging Face row API with resumable checkpoints,
+discards signed image URLs, and stores only normalized trajectory content and
+image counts.
 
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   import-aguvis \
   --config mobile.navigation \
   --split train \
@@ -112,6 +114,28 @@ The current vectors use deterministic feature hashing over instructions and
 action descriptions. This is a dependency-free pipeline baseline, not a
 semantic ML embedding.
 
+For larger text-only samples, use Parquet column pruning so screenshot bytes
+are never downloaded. PyArrow 19.0.0 has a known nested-Parquet regression;
+use 19.0.1 or newer:
+
+```bash
+python -m pip install "pyarrow>=19.0.1" fsspec requests
+python tools/fetch_aguvis_parquet.py \
+  --config mobile.navigation \
+  --split train \
+  --limit 10000 \
+  --output work/aguvis-10000-rows.json
+
+java --add-modules jdk.incubator.vector \
+  --enable-native-access=ALL-UNNAMED \
+  -jar target/agenttrace-0.2.0.jar \
+  import-aguvis \
+  --rows-file work/aguvis-10000-rows.json \
+  --limit 10000 \
+  --dimension 256 \
+  --output work/aguvis-10000.json
+```
+
 ## Generate semantic embeddings locally
 
 Download the pinned model and vocabulary described in
@@ -122,7 +146,7 @@ when the model is stored at the documented path:
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   embed \
   --input sample-data/aguvis-500.json \
   --output sample-data/aguvis-500-minilm.json \
@@ -141,7 +165,7 @@ Generate a reproducible dataset/search smoke report:
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   report \
   --data sample-data/aguvis-500-minilm.json \
   --index data/aguvis-500-minilm-report-index \
@@ -155,7 +179,7 @@ java --add-modules jdk.incubator.vector \
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   --data sample-data/trajectories.json \
   --index data/lucene-index \
   --port 8080
@@ -222,8 +246,9 @@ Then select cuVS from the Java service or evaluation commands:
 ```powershell
 java --add-modules jdk.incubator.vector `
   --enable-native-access=ALL-UNNAMED `
-  -jar target\agenttrace-0.1.0.jar `
+  -jar target\agenttrace-0.2.0.jar `
   --backend cuvs `
+  --cuvs-algorithm cagra `
   --cuvs-url http://127.0.0.1:8765 `
   --data sample-data\trajectories.json `
   --port 8080
@@ -253,15 +278,21 @@ machine-readable results are in `reports/windows-minilm-embedding-run.json`,
 `reports/windows-minilm-evaluation.json`, and
 `reports/minilm-dataset-report.json`.
 
-The cuVS backend reproduces the Lucene Recall@5, MRR, recovery metrics, and all
-six duplicate groups on the same committed vectors. At 500 vectors, per-request
-localhost/WSL2 overhead makes the GPU path slower; these results establish
-correctness, not a GPU speedup claim.
+The exact cuVS backend reproduces the Lucene Recall@5, MRR, recovery metrics,
+and all six duplicate groups on the same committed vectors. The CAGRA path uses
+the same filters and result contract, while `/search/batch` amortizes
+localhost/WSL2 transport across query sets.
+
+On the 10,000-vector MiniLM run with 500 Top-10 queries, CAGRA reached `1.0000`
+Recall@10 at `5,352` batched queries/s. Lucene HNSW reached `0.9968` Recall@10
+at `3,060` queries/s. CAGRA was about 1.75x faster for the warmed batch, while
+Lucene remained much faster for individual queries because it avoids
+localhost/WSL2 transport. See `reports/windows-cpu-gpu-10000.json`.
 
 ## Next milestones
 
-1. Add batched query transport and a cuVS CAGRA approximate-search option.
-2. Benchmark Lucene CPU versus cuVS GPU at 10K, 100K, and 1M real vectors.
+1. Extend the real-vector benchmark to 100K and 1M vectors.
+2. Record GPU memory and power alongside throughput and latency.
 3. Add screenshot embeddings and multimodal fusion.
 
 See [GPU migration](docs/GPU_MIGRATION.md) and

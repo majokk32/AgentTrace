@@ -6,7 +6,7 @@
 
     <groupId>com.yikeyang</groupId>
     <artifactId>agenttrace</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <name>AgentTrace</name>
     <description>Vector search and deduplication for GUI-agent trajectories</description>
     <licenses>

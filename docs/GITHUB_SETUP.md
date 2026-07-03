@@ -42,7 +42,7 @@ evaluation does not require downloading the model:
 ```powershell
 java --add-modules jdk.incubator.vector `
   --enable-native-access=ALL-UNNAMED `
-  -jar target\agenttrace-0.1.0.jar `
+  -jar target\agenttrace-0.2.0.jar `
   evaluate `
   --data sample-data\aguvis-500-minilm.json `
   --labels labels\aguvis-500-intents-v1.json `

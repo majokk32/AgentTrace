@@ -11,15 +11,19 @@ collection is hundreds of gigabytes.
 - Exercises indexing, filtering, retrieval, and deduplication
 - Requires only a few kilobytes
 
-## Phase 2: small public subset (completed baseline)
+## Phase 2: public subsets (completed through 10K)
 
 The current baseline imports 500 mobile-navigation rows through the Hugging
 Face row API without downloading screenshots. The normalized JSON is about
 1.4 MiB and references 3,557 images.
 
-Next target: 1,000 to 10,000 mobile navigation rows:
+The storage-safe Parquet path now imports 10,000 mobile-navigation rows by
+reading only `messages` and `metadata`; screenshot columns never leave the
+remote shards. The local run contains 2,043 AITW and 7,957 Android Control
+trajectories. It is embedded with 384-dimensional MiniLM for the CPU/GPU
+benchmark and remains outside Git.
 
-- Download only selected AGUVIS shards.
+- Download only selected AGUVIS text columns.
 - Store compressed screenshots outside Git.
 - Cache embeddings separately from the source images.
 - Use a content hash so repeated screenshots are embedded once.
@@ -39,8 +43,8 @@ results, and limitations.
 
 ## Phase 4: large-scale run
 
-Run images and GPU indexing on the NVIDIA Windows/WSL2 machine. The portable
-repository retains:
+The 10K CPU/GPU run uses the NVIDIA Windows/WSL2 machine. The next scale points
+are 100K and 1M vectors. The portable repository retains:
 
 - Source code
 - A small development sample

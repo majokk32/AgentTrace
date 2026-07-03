@@ -41,6 +41,8 @@ public final class RecoveryEvaluationApplication {
         String backendName = options.getOrDefault("backend", "lucene");
         String cuvsUrl = options.getOrDefault(
                 "cuvs-url", CuvsTrajectorySearchBackend.DEFAULT_URL);
+        String cuvsAlgorithm = options.getOrDefault(
+                "cuvs-algorithm", "brute_force");
         if (k < 1 || k > 100) {
             throw new IllegalArgumentException("k must be between 1 and 100");
         }
@@ -59,7 +61,7 @@ public final class RecoveryEvaluationApplication {
         long indexBuildMillis;
         String backend;
         try (TrajectorySearchBackend searchBackend = SearchBackendFactory.create(
-                backendName, indexPath, cuvsUrl, objectMapper)) {
+                backendName, indexPath, cuvsUrl, cuvsAlgorithm, objectMapper)) {
             searchBackend.rebuild(trajectories);
             indexBuildMillis = elapsedMillis(buildStarted);
             backend = searchBackend.stats().backend();

@@ -21,9 +21,22 @@ public final class AguvisImportApplication {
         int limit = Integer.parseInt(options.getOrDefault("limit", "500"));
         int dimension = Integer.parseInt(options.getOrDefault("dimension", "256"));
 
+        AguvisRowApiImporter importer =
+                new AguvisRowApiImporter(new ObjectMapper());
         AguvisRowApiImporter.ImportSummary summary =
-                new AguvisRowApiImporter(new ObjectMapper()).importRows(
-                        config, split, startOffset, limit, dimension, output);
+                options.containsKey("rows-file")
+                        ? importer.importRowsFile(
+                                Path.of(options.get("rows-file")),
+                                limit,
+                                dimension,
+                                output)
+                        : importer.importRows(
+                                config,
+                                split,
+                                startOffset,
+                                limit,
+                                dimension,
+                                output);
         System.out.printf(
                 "Imported %d AGUVIS trajectories to %s (%d dimensions, %.2f MiB)%n",
                 summary.trajectoryCount(),
@@ -46,4 +59,3 @@ public final class AguvisImportApplication {
         return options;
     }
 }
-

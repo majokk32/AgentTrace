@@ -68,16 +68,26 @@ Its ranking metrics match Lucene:
 | MRR | 0.965 | 0.965 |
 | Duplicate groups at 0.92 | 6 | 6 |
 
-The cuVS recovery results also match the Lucene values above. The current GPU
-transport sends one localhost request per query, so the 500-vector latency is
-dominated by HTTP/WSL2 overhead and should not be presented as a speedup.
+The cuVS recovery results also match the Lucene values above. Exact cuVS is
+also the ground truth for the 10K CAGRA benchmark. Batched GPU measurements use
+one localhost request per query set; single-query measurements retain the
+end-to-end HTTP/WSL2 product path.
+
+## 10K approximate-search result
+
+With 10,000 real mobile-navigation MiniLM vectors and 500 deterministic Top-10
+queries, CAGRA achieved `1.0000` mean Recall@10 and a `1.0000` full-recall
+rate against exact cuVS. Lucene achieved `0.9968` mean Recall@10 and a `0.976`
+full-recall rate. Warmed batch throughput was `5,352` queries/s for CAGRA and
+`3,060` for Lucene. These are single-machine development measurements, not a
+general hardware comparison.
 
 ## Reproduce
 
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   evaluate \
   --data sample-data/aguvis-500-minilm.json \
   --labels labels/aguvis-500-intents-v1.json \
@@ -91,7 +101,7 @@ java --add-modules jdk.incubator.vector \
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   inject-failures \
   --input sample-data/aguvis-500-minilm.json \
   --output sample-data/aguvis-500-plus-57-labeled-failures.json \
@@ -103,7 +113,7 @@ java --add-modules jdk.incubator.vector \
 ```bash
 java --add-modules jdk.incubator.vector \
   --enable-native-access=ALL-UNNAMED \
-  -jar target/agenttrace-0.1.0.jar \
+  -jar target/agenttrace-0.2.0.jar \
   evaluate-recovery \
   --data sample-data/aguvis-500-plus-57-labeled-failures.json \
   --pairs labels/aguvis-labeled-failure-pairs-57.json \
@@ -118,4 +128,5 @@ either evaluation command:
 ```text
 --backend cuvs
 --cuvs-url http://127.0.0.1:8765
+--cuvs-algorithm brute_force
 ```

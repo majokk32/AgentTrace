@@ -19,11 +19,12 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from cuvs.neighbors import brute_force
+from cuvs.neighbors import brute_force, cagra
 from pylibraft.common import device_ndarray
 
 
-BACKEND_NAME = "cuvs-brute-force-gpu"
+BRUTE_FORCE = "brute_force"
+CAGRA = "cagra"
 
 
 @dataclass
@@ -31,6 +32,7 @@ class CachedIndex:
     global_indices: np.ndarray
     vectors: device_ndarray
     index: Any
+    algorithm: str
 
 
 class AgentTraceGpuIndex:
@@ -40,9 +42,19 @@ class AgentTraceGpuIndex:
         self._embeddings = np.empty((0, 0), dtype=np.float32)
         self._norms = np.empty((0,), dtype=np.float32)
         self._indices: dict[tuple[Any, ...], CachedIndex] = {}
+        self._algorithm = BRUTE_FORCE
 
     def rebuild(self, payload: Any) -> dict[str, Any]:
-        trajectories = payload.get("trajectories") if isinstance(payload, dict) else payload
+        algorithm = BRUTE_FORCE
+        if isinstance(payload, dict):
+            trajectories = payload.get("trajectories")
+            algorithm = str(payload.get("algorithm", BRUTE_FORCE)).lower()
+        else:
+            trajectories = payload
+        if algorithm == "exact":
+            algorithm = BRUTE_FORCE
+        if algorithm not in (BRUTE_FORCE, CAGRA):
+            raise ValueError("algorithm must be brute_force or cagra")
         if not isinstance(trajectories, list) or not trajectories:
             raise ValueError("at least one trajectory is required")
 
@@ -94,6 +106,7 @@ class AgentTraceGpuIndex:
             self._trajectories = normalized
             self._embeddings = embeddings
             self._norms = norms
+            self._algorithm = algorithm
             self._indices.clear()
             self._index_for((None, None, None))
             return self.stats()
@@ -104,41 +117,68 @@ class AgentTraceGpuIndex:
             return {
                 "trajectoryCount": len(self._trajectories),
                 "vectorDimension": dimension,
-                "backend": BACKEND_NAME,
+                "backend": self._backend_name(),
             }
 
     def health(self) -> dict[str, Any]:
         return {
             "status": "ok",
-            "backend": BACKEND_NAME,
+            "backend": self._backend_name(),
             "cuvsVersion": version("cuvs-cu12"),
             "stats": self.stats(),
         }
 
     def search(self, request: Any) -> list[dict[str, Any]]:
-        if not isinstance(request, dict):
-            raise ValueError("search request must be a JSON object")
+        return self.search_batch({"requests": [request]})[0]
+
+    def search_batch(self, payload: Any) -> list[list[dict[str, Any]]]:
+        requests = payload.get("requests") if isinstance(payload, dict) else payload
+        if not isinstance(requests, list) or not requests:
+            raise ValueError("at least one search request is required")
+        if len(requests) > 10_000:
+            raise ValueError("a search batch cannot exceed 10000 requests")
+
         with self._lock:
             if not self._trajectories:
-                return []
-            embedding = self._validate_query_embedding(request.get("embedding"))
-            k = self._requested_k(request.get("k"))
-            key = self._filter_key(request)
-            cached = self._index_for(key)
-            if cached.global_indices.size == 0:
-                return []
-            actual_k = min(k, int(cached.global_indices.size))
-            distances, neighbors = self._search_index(
-                cached, np.ascontiguousarray([embedding], dtype=np.float32), actual_k
-            )
+                return [[] for _ in requests]
 
-            results: list[dict[str, Any]] = []
-            for distance, local_index in zip(distances[0], neighbors[0]):
-                global_index = int(cached.global_indices[int(local_index)])
-                result = dict(self._trajectories[global_index])
-                result["score"] = float(np.clip(1.0 - float(distance) / 2.0, 0.0, 1.0))
-                results.append(result)
-            return results
+            validated: list[tuple[np.ndarray, int, tuple[Any, ...]]] = []
+            grouped: dict[tuple[Any, ...], list[int]] = {}
+            for position, request in enumerate(requests):
+                if not isinstance(request, dict):
+                    raise ValueError("each search request must be a JSON object")
+                embedding = self._validate_query_embedding(request.get("embedding"))
+                k = self._requested_k(request.get("k"))
+                key = self._filter_key(request)
+                validated.append((embedding, k, key))
+                grouped.setdefault(key, []).append(position)
+
+            output: list[list[dict[str, Any]]] = [[] for _ in requests]
+            for key, positions in grouped.items():
+                cached = self._index_for(key)
+                if cached.global_indices.size == 0:
+                    continue
+                queries = np.ascontiguousarray(
+                    [validated[position][0] for position in positions],
+                    dtype=np.float32,
+                )
+                maximum_k = min(
+                    max(validated[position][1] for position in positions),
+                    int(cached.global_indices.size),
+                )
+                distances, neighbors = self._search_index(
+                    cached, queries, maximum_k
+                )
+                for row, position in enumerate(positions):
+                    requested_k = min(
+                        validated[position][1], int(cached.global_indices.size)
+                    )
+                    output[position] = self._format_results(
+                        cached,
+                        distances[row, :requested_k],
+                        neighbors[row, :requested_k],
+                    )
+            return output
 
     def deduplicate(self, request: Any) -> list[dict[str, Any]]:
         if not isinstance(request, dict):
@@ -267,24 +307,74 @@ class AgentTraceGpuIndex:
 
         global_indices = np.asarray(matching, dtype=np.int64)
         if not matching:
-            cached = CachedIndex(global_indices, None, None)  # type: ignore[arg-type]
+            cached = CachedIndex(  # type: ignore[arg-type]
+                global_indices, None, None, BRUTE_FORCE
+            )
         else:
             host_vectors = np.ascontiguousarray(
                 self._embeddings[global_indices], dtype=np.float32
             )
             gpu_vectors = device_ndarray(host_vectors)
-            index = brute_force.build(gpu_vectors, metric="cosine")
-            cached = CachedIndex(global_indices, gpu_vectors, index)
+            algorithm = self._algorithm
+            if algorithm == CAGRA and len(matching) >= 128:
+                params = cagra.IndexParams(
+                    metric="cosine",
+                    build_algo="nn_descent",
+                    graph_degree=64,
+                    intermediate_graph_degree=128,
+                    nn_descent_niter=20,
+                )
+                index = cagra.build(params, gpu_vectors)
+            else:
+                algorithm = BRUTE_FORCE
+                index = brute_force.build(gpu_vectors, metric="cosine")
+            cached = CachedIndex(
+                global_indices, gpu_vectors, index, algorithm
+            )
         self._indices[key] = cached
         return cached
 
-    @staticmethod
     def _search_index(
+        self,
         cached: CachedIndex, queries: np.ndarray, k: int
     ) -> tuple[np.ndarray, np.ndarray]:
         gpu_queries = device_ndarray(np.ascontiguousarray(queries, dtype=np.float32))
-        distances, neighbors = brute_force.search(cached.index, gpu_queries, k)
+        if cached.algorithm == CAGRA:
+            search_params = cagra.SearchParams(
+                itopk_size=max(64, k),
+                search_width=1,
+            )
+            distances, neighbors = cagra.search(
+                search_params, cached.index, gpu_queries, k
+            )
+        else:
+            distances, neighbors = brute_force.search(
+                cached.index, gpu_queries, k
+            )
         return distances.copy_to_host(), neighbors.copy_to_host()
+
+    def _format_results(
+        self,
+        cached: CachedIndex,
+        distances: np.ndarray,
+        neighbors: np.ndarray,
+    ) -> list[dict[str, Any]]:
+        results: list[dict[str, Any]] = []
+        for distance, local_index in zip(distances, neighbors):
+            global_index = int(cached.global_indices[int(local_index)])
+            result = dict(self._trajectories[global_index])
+            result["score"] = float(
+                np.clip(1.0 - float(distance) / 2.0, 0.0, 1.0)
+            )
+            results.append(result)
+        return results
+
+    def _backend_name(self) -> str:
+        return (
+            "cuvs-cagra-gpu"
+            if self._algorithm == CAGRA
+            else "cuvs-brute-force-gpu"
+        )
 
     def _cosine(self, left: int, right: int) -> float:
         numerator = float(np.dot(self._embeddings[left], self._embeddings[right]))
@@ -326,6 +416,8 @@ class WorkerHandler(BaseHTTPRequestHandler):
                 result = self.server.index.rebuild(payload)
             elif self.path == "/search":
                 result = self.server.index.search(payload)
+            elif self.path == "/search/batch":
+                result = self.server.index.search_batch(payload)
             elif self.path == "/deduplicate":
                 result = self.server.index.deduplicate(payload)
             else:

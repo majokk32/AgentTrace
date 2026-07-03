@@ -15,6 +15,16 @@ public final class SearchBackendFactory {
             Path luceneIndexPath,
             String cuvsUrl,
             ObjectMapper objectMapper) throws IOException {
+        return create(
+                backend, luceneIndexPath, cuvsUrl, "brute_force", objectMapper);
+    }
+
+    public static TrajectorySearchBackend create(
+            String backend,
+            Path luceneIndexPath,
+            String cuvsUrl,
+            String cuvsAlgorithm,
+            ObjectMapper objectMapper) throws IOException {
         String name = backend == null
                 ? "lucene"
                 : backend.trim().toLowerCase(Locale.ROOT);
@@ -22,9 +32,14 @@ public final class SearchBackendFactory {
             case "lucene", "lucene-hnsw" ->
                     new LuceneTrajectorySearchBackend(luceneIndexPath);
             case "cuvs", "cuvs-brute-force-gpu" ->
-                    new CuvsTrajectorySearchBackend(cuvsUrl, objectMapper);
+                    new CuvsTrajectorySearchBackend(
+                            cuvsUrl, objectMapper, cuvsAlgorithm);
+            case "cuvs-cagra", "cuvs-cagra-gpu" ->
+                    new CuvsTrajectorySearchBackend(
+                            cuvsUrl, objectMapper, "cagra");
             default -> throw new IllegalArgumentException(
-                    "unknown backend " + backend + "; expected lucene or cuvs");
+                    "unknown backend " + backend
+                            + "; expected lucene, cuvs, or cuvs-cagra");
         };
     }
 }
