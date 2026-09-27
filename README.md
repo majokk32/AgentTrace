@@ -20,6 +20,7 @@ GitHub Actions CI
 | Embeddings | 384-dimensional MiniLM with Java WordPiece tokenization and mean pooling |
 | Data | Public AGUVIS mobile-navigation trajectories; 500 checked-in records and a reproducible 10K benchmark pipeline |
 | Evaluation | Retrieval, duplicate detection, parent-excluded failure recovery, Recall@K, throughput, and latency |
+| Operations | Live workload telemetry, route-level diagnostics, alerting, and a dependency-free dashboard |
 | Quality | Unit/integration tests, transport retries, resumable imports, machine-readable reports, and CI |
 
 The central engineering question is not simply whether a GPU can run vector
@@ -69,6 +70,8 @@ the 10K MiniLM run embedded 54.4 trajectories/s and is recorded in
 - Hardened cross-language execution with bounded retries, import checkpoints,
   adaptive row-API page splitting, deterministic query selection, and pinned
   WSL2/cuVS dependencies.
+- Added an operator dashboard and machine-readable telemetry for request
+  volume, errors, latency, backend state, alerts, and last-failure diagnosis.
 - Added human-reviewed labels and controlled failure injection to test whether
   incomplete trajectories retrieve alternative successful traces rather than
   only their exact source.
@@ -91,6 +94,9 @@ repository:
 - Engineered a reproducible data and reliability pipeline with local MiniLM
   inference, storage-safe Parquet ingestion, metadata filtering, transport
   retries, Maven tests, versioned reports, and GitHub Actions CI.
+- Built a dependency-free operations dashboard with concurrent workload
+  instrumentation, route-level latency/error diagnostics, alert thresholds,
+  and last-failure context for production-style triage.
 
 Useful keywords for accurate project indexing: `Java`, `JVM`, `Lucene`,
 `HNSW`, `NVIDIA cuVS`, `CAGRA`, `approximate nearest neighbor search`,
@@ -305,7 +311,13 @@ Health and index statistics:
 ```bash
 curl http://localhost:8080/health
 curl http://localhost:8080/api/stats
+curl http://localhost:8080/api/telemetry
 ```
+
+Open `http://localhost:8080/dashboard` for the live operator view. Monitoring
+requests are excluded from workload counters so dashboard polling does not
+distort the measurements. See [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for
+alert thresholds and the bring-up/triage workflow.
 
 Find successful mobile trajectories similar to the Wi-Fi example:
 

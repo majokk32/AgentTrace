@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -28,6 +27,7 @@ public final class AgentTraceServer implements AutoCloseable {
     private final ObjectMapper objectMapper;
     private final HttpServer server;
     private final ExecutorService executor;
+    private final OperationalTelemetry telemetry;
 
     public AgentTraceServer(
             int port,
@@ -41,12 +41,17 @@ public final class AgentTraceServer implements AutoCloseable {
         this.objectMapper = objectMapper;
         this.server = HttpServer.create(new InetSocketAddress(port), 0);
         this.executor = Executors.newVirtualThreadPerTaskExecutor();
+        this.telemetry = new OperationalTelemetry();
         server.setExecutor(executor);
         registerRoutes();
     }
 
     public void start() {
         server.start();
+    }
+
+    public int port() {
+        return server.getAddress().getPort();
     }
 
     @Override
@@ -56,16 +61,21 @@ public final class AgentTraceServer implements AutoCloseable {
     }
 
     private void registerRoutes() {
-        server.createContext("/health", exchange -> handle(exchange, "GET", ignored ->
-                Map.of("status", "ok")));
-        server.createContext("/api/stats", exchange -> handle(exchange, "GET", ignored ->
-                backend.stats()));
-        server.createContext("/api/search", exchange -> handle(exchange, "POST", input -> {
-            SearchRequest request = objectMapper.readValue(input, SearchRequest.class);
-            return backend.search(request);
-        }));
+        server.createContext("/health", exchange -> handle(
+                exchange, "GET", "/health", false, ignored -> Map.of("status", "ok")));
+        server.createContext("/api/telemetry", exchange -> handle(
+                exchange, "GET", "/api/telemetry", false,
+                ignored -> telemetry.snapshot(backend.stats())));
+        server.createContext("/dashboard", exchange -> handleDashboard(exchange));
+        server.createContext("/api/stats", exchange -> handle(
+                exchange, "GET", "/api/stats", true, ignored -> backend.stats()));
+        server.createContext("/api/search", exchange -> handle(
+                exchange, "POST", "/api/search", true, input -> {
+                    SearchRequest request = objectMapper.readValue(input, SearchRequest.class);
+                    return backend.search(request);
+                }));
         server.createContext("/api/search/by-trajectory", exchange -> handle(
-                exchange, "POST", input -> {
+                exchange, "POST", "/api/search/by-trajectory", true, input -> {
                     SearchByTrajectoryRequest request =
                             objectMapper.readValue(input, SearchByTrajectoryRequest.class);
                     if (request.trajectoryId() == null || request.trajectoryId().isBlank()) {
@@ -91,30 +101,80 @@ public final class AgentTraceServer implements AutoCloseable {
                             .limit(requestedK)
                             .toList();
                 }));
-        server.createContext("/api/deduplicate", exchange -> handle(exchange, "POST", input -> {
-            DeduplicationRequest request = objectMapper.readValue(input, DeduplicationRequest.class);
-            return backend.findDuplicateGroups(
-                    trajectories, request.requestedThreshold(), request.requestedCandidateK());
-        }));
+        server.createContext("/api/deduplicate", exchange -> handle(
+                exchange, "POST", "/api/deduplicate", true, input -> {
+                    DeduplicationRequest request =
+                            objectMapper.readValue(input, DeduplicationRequest.class);
+                    return backend.findDuplicateGroups(
+                            trajectories,
+                            request.requestedThreshold(),
+                            request.requestedCandidateK());
+                }));
     }
 
-    private void handle(HttpExchange exchange, String method, ExchangeAction action)
+    private void handle(
+            HttpExchange exchange,
+            String method,
+            String route,
+            boolean observed,
+            ExchangeAction action)
             throws IOException {
+        OperationalTelemetry.RequestObservation observation = observed
+                ? telemetry.start(method + " " + route)
+                : null;
+        int status = 500;
+        Exception failure = null;
         try {
             if (!method.equalsIgnoreCase(exchange.getRequestMethod())) {
-                writeJson(exchange, 405, Map.of("error", "method not allowed"));
+                status = 405;
+                writeJson(exchange, status, Map.of("error", "method not allowed"));
                 return;
             }
             Object response = action.execute(exchange.getRequestBody());
-            writeJson(exchange, 200, response);
+            status = 200;
+            writeJson(exchange, status, response);
         } catch (IllegalArgumentException exception) {
-            writeJson(exchange, 400, Map.of("error", exception.getMessage()));
+            status = 400;
+            failure = exception;
+            writeJson(exchange, status, Map.of("error", exception.getMessage()));
         } catch (Exception exception) {
-            writeJson(exchange, 500, Map.of(
+            status = 500;
+            failure = exception;
+            writeJson(exchange, status, Map.of(
                     "error", "internal server error",
                     "detail", exception.getMessage() == null
                             ? exception.getClass().getSimpleName()
                             : exception.getMessage()));
+        } finally {
+            if (observation != null) {
+                observation.complete(status, failure);
+            }
+            exchange.close();
+        }
+    }
+
+    private void handleDashboard(HttpExchange exchange) throws IOException {
+        try {
+            if (!"GET".equalsIgnoreCase(exchange.getRequestMethod())) {
+                writeJson(exchange, 405, Map.of("error", "method not allowed"));
+                return;
+            }
+            byte[] payload;
+            try (InputStream input = AgentTraceServer.class.getResourceAsStream(
+                    "/dashboard.html")) {
+                if (input == null) {
+                    throw new IOException("dashboard resource is missing");
+                }
+                payload = input.readAllBytes();
+            }
+            exchange.getResponseHeaders().set("Content-Type", "text/html; charset=utf-8");
+            exchange.getResponseHeaders().set(
+                    "Content-Security-Policy",
+                    "default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'");
+            exchange.sendResponseHeaders(200, payload.length);
+            try (OutputStream outputStream = exchange.getResponseBody()) {
+                outputStream.write(payload);
+            }
         } finally {
             exchange.close();
         }

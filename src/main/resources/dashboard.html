@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentTrace Operations</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
+    body { margin: 0; background: #0b1016; color: #e7edf5; }
+    main { max-width: 1100px; margin: auto; padding: 32px 20px 60px; }
+    header { display: flex; align-items: end; justify-content: space-between; gap: 16px; }
+    h1 { margin: 0; font-size: 2rem; letter-spacing: -.04em; }
+    .muted { color: #95a3b5; }
+    .status { padding: 7px 12px; border-radius: 999px; font-weight: 700; background: #173b2a; color: #73e6a6; }
+    .status.degraded { background: #4a291f; color: #ffae87; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 24px 0; }
+    .card, section { background: #121a24; border: 1px solid #253244; border-radius: 12px; padding: 18px; }
+    .card span { display: block; color: #95a3b5; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; }
+    .card strong { display: block; margin-top: 8px; font-size: 1.65rem; }
+    section { margin-top: 12px; overflow-x: auto; }
+    h2 { margin: 0 0 14px; font-size: 1rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 8px; text-align: right; border-top: 1px solid #253244; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: #95a3b5; font-size: .78rem; text-transform: uppercase; }
+    #alerts:empty::after { content: "No operational alerts"; color: #73e6a6; }
+    .alert { color: #ffae87; margin: 6px 0; }
+    code { color: #9ad0ff; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1>AgentTrace Operations</h1><div class="muted" id="backend">Loading telemetry…</div></div>
+    <div class="status" id="status">CONNECTING</div>
+  </header>
+  <div class="grid">
+    <div class="card"><span>Workload requests</span><strong id="requests">—</strong></div>
+    <div class="card"><span>Error rate</span><strong id="errors">—</strong></div>
+    <div class="card"><span>Mean latency</span><strong id="mean">—</strong></div>
+    <div class="card"><span>Max latency</span><strong id="max">—</strong></div>
+    <div class="card"><span>Uptime</span><strong id="uptime">—</strong></div>
+  </div>
+  <section><h2>Operational alerts</h2><div id="alerts"></div></section>
+  <section>
+    <h2>Route diagnostics</h2>
+    <table><thead><tr><th>Route</th><th>Requests</th><th>Errors</th><th>Error rate</th><th>Mean ms</th><th>Max ms</th></tr></thead><tbody id="routes"></tbody></table>
+  </section>
+  <p class="muted">Refreshes every 3 seconds from <code>/api/telemetry</code>. Health and telemetry probes are excluded from workload measurements.</p>
+</main>
+<script>
+  const number = new Intl.NumberFormat();
+  const percent = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 2 });
+  const ms = value => `${value.toFixed(2)} ms`;
+  async function refresh() {
+    try {
+      const response = await fetch('/api/telemetry', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      const status = document.querySelector('#status');
+      status.textContent = data.status.toUpperCase();
+      status.className = `status ${data.status}`;
+      document.querySelector('#backend').textContent = `${data.backend.backend} · ${number.format(data.backend.trajectoryCount)} trajectories · ${data.backend.vectorDimension} dimensions`;
+      document.querySelector('#requests').textContent = number.format(data.workload.totalRequests);
+      document.querySelector('#errors').textContent = percent.format(data.workload.errorRate);
+      document.querySelector('#mean').textContent = ms(data.latencyMs.mean);
+      document.querySelector('#max').textContent = ms(data.latencyMs.max);
+      document.querySelector('#uptime').textContent = `${number.format(data.uptimeSeconds)} s`;
+      document.querySelector('#alerts').innerHTML = data.alerts.map(alert => `<div class="alert">${escapeHtml(alert)}</div>`).join('');
+      document.querySelector('#routes').innerHTML = Object.entries(data.routes).map(([route, value]) => `<tr><td>${escapeHtml(route)}</td><td>${number.format(value.requests)}</td><td>${number.format(value.errors)}</td><td>${percent.format(value.errorRate)}</td><td>${value.meanLatencyMs.toFixed(2)}</td><td>${value.maxLatencyMs.toFixed(2)}</td></tr>`).join('');
+    } catch (error) {
+      const status = document.querySelector('#status');
+      status.textContent = 'OFFLINE';
+      status.className = 'status degraded';
+      document.querySelector('#alerts').innerHTML = `<div class="alert">Telemetry unavailable: ${escapeHtml(error.message)}</div>`;
+    }
+  }
+  function escapeHtml(value) {
+    const node = document.createElement('div');
+    node.textContent = value;
+    return node.innerHTML;
+  }
+  refresh();
+  setInterval(refresh, 3000);
+</script>
+</body>
+</html>

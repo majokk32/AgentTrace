@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Added a live operations dashboard and JSON telemetry endpoint with workload,
+  error, latency, route-level, backend, alert, and last-failure diagnostics.
+- Added an operations runbook and HTTP integration coverage for the dashboard
+  and telemetry behavior.
+
 ## 0.2.0 - 2026-07-02
 
 - Added batched query transport for the localhost cuVS worker.
